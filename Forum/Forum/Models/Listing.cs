@@ -2,7 +2,7 @@
 
 namespace Forum.Models
 {
-    public class Listings
+    public class Listing
     {
         public int ListingId { get; set; }
         public string Name { get; set; } = string.Empty;

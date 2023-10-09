@@ -7,9 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 // Database
-builder.Services.AddDbContext<ListingsDbContext>(options => {
+builder.Services.AddDbContext<ListingDbContext>(options => {
     options.UseSqlite(
-        builder.Configuration["ConnectionStrings: ListingsDbContextConnection"]);
+        builder.Configuration["ConnectionStrings:ListingDbContextConnection"]);
 });
 
 var app = builder.Build();
