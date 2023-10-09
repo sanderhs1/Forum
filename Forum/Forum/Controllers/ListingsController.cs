@@ -2,23 +2,31 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using System.Reflection;
 
 namespace Forum.Controllers
 {
     public class ListingsController : Controller
     {
+        private readonly ListingsDbContext _listingsDbContext;
+
+        public ListingsController(ListingsDbContext listingsDbContext)
+        {
+            _listingsDbContext = listingsDbContext;
+        }
+
         public IActionResult Table()
         {
-            var listings = new List<Listing>();
+            var listings = new List<Listings>();
 
-            var listing1 = new Listing
+            var listing1 = new Listings
             {
                 ListingId = 1,
                 Name = "Name",
                 Price = 1000
             };
 
-            var listing2 = new Listing
+            var listing2 = new Listings
             {
                 ListingId = 2,
                 Name = "Name",

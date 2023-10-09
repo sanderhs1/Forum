@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Forum.Models.Listing>
+﻿@model IEnumerable<Listings>
 
 <div class="container">
-    <h1>@ViewBag.CurrentViewName</h1>
+    <h1>(@ViewBag.CurrentViewName View)</h1>
     <table class='table'>
-            <!-- Legge inn bilde som en variabel--> 
+            
         @foreach (var listings in Model)
         {
             <tr>
