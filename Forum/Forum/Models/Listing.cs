@@ -2,9 +2,9 @@
 
 namespace Forum.Models
 {
-    public class Item
+    public class Listing
     {
-        public int ItemId { get; set; }
+        public int ListingId { get; set; }
         public string Name { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string? Description { get; set; }
