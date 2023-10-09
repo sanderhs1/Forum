@@ -5,33 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
 
-
-namespace Forum.Controllers;
-
-
-public class ItemController : Controllers
+namespace Forum.Controllers
 {
-    public IAactionResult Table()
+    public class ItemController : Controller
     {
-        var items = new List<Item>();
-        var item1 = new Item();
-        item1.ItemId = 1;
-        item1.Name = "Name",
-        item1.Price = 1000;
-
-        var item2 = new Item
+        public IActionResult Table()
         {
-            item2.ItemId = 2;
-            item2.Name = "Name",
-            item2.Price = 2000;
-        };
+            var items = new List<Item>();
 
+            var item1 = new Item
+            {
+                ItemId = 1,
+                Name = "Name",
+                Price = 1000
+            };
 
-        items.Add(item1);
-        items.Add(item2);
-        
-        ViewBag.CurrentViewName = " List of items ";
-        return View(items);
+            var item2 = new Item
+            {
+                ItemId = 2,
+                Name = "Name",
+                Price = 2000
+            };
 
+            items.Add(item1);
+            items.Add(item2);
+
+            ViewBag.CurrentViewName = "List of items";
+            return View(items);
+        }
     }
 }
