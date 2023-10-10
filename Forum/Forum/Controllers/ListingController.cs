@@ -21,7 +21,7 @@ namespace Forum.Controllers
             var listingListViewModel = new ListingListViewModel(listings, "Table");
             return View(listingListViewModel);
         }
-
+        // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes
         public IActionResult Grid()
         {
             List<Listing> listings = _listingDbContext.Listings.ToList();
