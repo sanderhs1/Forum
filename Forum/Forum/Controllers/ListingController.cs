@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Renting.ViewModels;
-using Renting.Models;
+using Forum.Models;
+using Forum.ViewModels;
 
-namespace Renting.Controllers
+namespace Forum.Controllers
 {
     public class ListingController : Controller
     {
-        private readonly ListingDbContext _listingDbContext;
+    private readonly ListingDbContext _listingDbContext;
 
         public ListingController(ListingDbContext listingDbContext)
         {

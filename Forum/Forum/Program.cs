@@ -1,5 +1,5 @@
+using Forum.Models;
 using Microsoft.EntityFrameworkCore;
-using Renting.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

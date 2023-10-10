@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Renting.Models;
+using Forum.Models;
 
-namespace Renting.ViewModels
+namespace Forum.ViewModels
 {
     public class ListingListViewModel
     {
