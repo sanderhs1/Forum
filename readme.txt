@@ -1,6 +1,6 @@
 Liste som må gjøres:
 Fjerne grid/table view endre til et type view, som passer best.
-Async db access
+Async db access ( Har opprettet Async Db, må få testet med å legge data - Pete) 
 Db seeding
 Expanded db CRUD
 DAL
