@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
 using Forum.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Forum.Controllers
 {
@@ -15,24 +16,23 @@ namespace Forum.Controllers
             _listingDbContext = listingDbContext;
         }
 
-        public IActionResult Table()
+        public async Task<IActionResult>Table()
         {
-            List<Listing> listings = _listingDbContext.Listings.ToList();
+            List<Listing> listings = await _listingDbContext.Listings.ToListAsync();
             var listingListViewModel = new ListingListViewModel(listings, "Table");
             return View(listingListViewModel);
         }
         // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes
-        public IActionResult Grid()
+        public async Task<IActionResult> Grid()
         {
-            List<Listing> listings = _listingDbContext.Listings.ToList();
+            List<Listing> listings = await _listingDbContext.Listings.ToListAsync();
             var listingListViewModel = new ListingListViewModel(listings, "Grid");
             return View(listingListViewModel);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            List<Listing> listings = _listingDbContext.Listings.ToList();
-            var listing = listings.FirstOrDefault(i => i.ListingId == id);
+            var listing = await _listingDbContext.Listings.FirstOrDefaultAsync(i => i.ListingId == id);
             if (listing == null)
                 return NotFound();
             return View(listing);
@@ -45,21 +45,21 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Listing listing)
+        public async Task<IActionResult>Create(Listing listing)
         {
             if (ModelState.IsValid)
             {
                 _listingDbContext.Listings.Add(listing);
-                _listingDbContext.SaveChanges();
+                await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public async Task<IActionResult>Update(int id)
         {
-            var listing = _listingDbContext.Listings.Find(id);
+            var listing = await _listingDbContext.Listings.FindAsync(id);
             if(listing == null)
             {
                 return NotFound();
@@ -67,21 +67,21 @@ namespace Forum.Controllers
             return View(listing);
         }
         [HttpPost]
-        public IActionResult Update(Listing listing)
+        public async Task<IActionResult>Update(Listing listing)
         {
             if (ModelState.IsValid)
             {
                 _listingDbContext.Listings.Update(listing);
-                _listingDbContext.SaveChanges();
+                await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
             return View(listing);
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult>Delete(int id)
         {
-            var listing = _listingDbContext.Listings.Find(id);
+            var listing = await _listingDbContext.Listings.FindAsync(id);
             if (listing == null)
             {
                 return NotFound();
@@ -90,15 +90,15 @@ namespace Forum.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult>DeleteConfirmed(int id)
         {
-            var listing = _listingDbContext.Listings.Find(id);
+            var listing = await _listingDbContext.Listings.FindAsync(id);
             if (listing == null)
             {
                 return NotFound();
             }
             _listingDbContext.Listings.Remove(listing);
-            _listingDbContext.SaveChanges();
+            await _listingDbContext.SaveChangesAsync();
             return RedirectToAction(nameof(Table));
         }
     }

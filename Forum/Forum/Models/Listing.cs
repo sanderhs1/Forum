@@ -1,7 +1,8 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Forum.Models
 {
+
     public class Listing
     {
         public int ListingId { get; set; }
@@ -10,5 +11,6 @@ namespace Forum.Models
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
 
+        public virtual List<RentListing>? RentListings { get; set; }
     }
 }
