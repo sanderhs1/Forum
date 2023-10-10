@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Listing>
+
+<div class="container">
+     <table class='table table-striped'>
+        <tr>
+            <th>ListingId</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var listing in Model)
+        {
+           <tr>
+               <td>@listing.ListingId</td>
+               <td>
+                   <a asp-controller="Listing"
+                   asp-action="Description"
+                   asp-route-id="@listing.ListingId">@listing.Name</a>
+               </td>
+               <td>@listing.Price.ToString("0.00 NOK")</td>
+               <td>@listing.Description</td>
+               <td>
+                   <img src="@listing.ImageUrl" alt="Listing Image" style="max-width: 80px; max-height: 80px;"/>
+               </td>
+               <td>
+                   <a asp-action="Update" asp-route-id="@listing.ListingId">Update</a>
+                   <a asp-action="Delete" asp-route-id="@listing.ListingId">Delete</a>
+               </td>
+            </tr>
+        }
+     </table>
+     <p>
+        <a class="btn btn-secondary"
+        asp-controller="Listing"
+        asp-action="Create">Create new Listing</a>
+        </p>
+</div>

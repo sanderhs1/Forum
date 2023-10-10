@@ -8,7 +8,7 @@ namespace Forum.Controllers
 {
     public class ListingController : Controller
     {
-    private readonly ListingDbContext _listingDbContext;
+        private readonly ListingDbContext _listingDbContext;
 
         public ListingController(ListingDbContext listingDbContext)
         {
@@ -36,6 +36,70 @@ namespace Forum.Controllers
             if (listing == null)
                 return NotFound();
             return View(listing);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Listing listing)
+        {
+            if (ModelState.IsValid)
+            {
+                _listingDbContext.Listings.Add(listing);
+                _listingDbContext.SaveChanges();
+                return RedirectToAction(nameof(Table));
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var listing = _listingDbContext.Listings.Find(id);
+            if(listing == null)
+            {
+                return NotFound();
+            }
+            return View(listing);
+        }
+        [HttpPost]
+        public IActionResult Update(Listing listing)
+        {
+            if (ModelState.IsValid)
+            {
+                _listingDbContext.Listings.Update(listing);
+                _listingDbContext.SaveChanges();
+                return RedirectToAction(nameof(Table));
+            }
+            return View(listing);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var listing = _listingDbContext.Listings.Find(id);
+            if (listing == null)
+            {
+                return NotFound();
+            }
+            return View(listing);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var listing = _listingDbContext.Listings.Find(id);
+            if (listing == null)
+            {
+                return NotFound();
+            }
+            _listingDbContext.Listings.Remove(listing);
+            _listingDbContext.SaveChanges();
+            return RedirectToAction(nameof(Table));
         }
     }
 }

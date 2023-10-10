@@ -1,17 +1,6 @@
 ﻿@model ListingListViewModel
 
-<div class="container">
-    <h1>(@ViewBag.CurrentViewName View)</h1>
-    <table class='table'>
-            
-        @foreach (var listing in Model.Listings)
-        {
-            <tr>
-                <td>@listing.ListingId</td>
-                <td>@listing.Name</td>
-                <td>@listing.Price.ToString("0.00 NOK")</td>
-                <td>@listing.Description</td>
-            </tr>
-        }
-    </table>
-    </div>
+<h1>Listings! (@Model.CurrentViewName View)</h1>
+<a href="/Listing/Grid">Grid View</a>
+
+<partial name="_ListingTable" model="Model.Listings"/>
