@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Forum.Models
+namespace Renting.Models
 {
     public class Listing
     {
