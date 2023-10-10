@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Forum.Models;
-
+//test
 namespace Forum.ViewModels
 {
     public class ListingListViewModel
