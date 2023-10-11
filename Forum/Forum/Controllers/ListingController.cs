@@ -16,6 +16,11 @@ namespace Forum.Controllers
             _listingDbContext = listingDbContext;
         }
 
+        public List<Rent> RentCosole()
+        {
+            return _listingDbContext.Rents.ToList();
+        }
+
         public async Task<IActionResult>Table()
         {
             List<Listing> listings = await _listingDbContext.Listings.ToListAsync();
