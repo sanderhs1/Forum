@@ -2,8 +2,8 @@ Liste som må gjøres:
 Fjerne grid/table view endre til et type view, som passer best.
 Async db access ( Har opprettet Async Db, må få testet med å legge data - Pete) 
 Db seeding ( har lagt til db seeding men får ikke installert en NuGet Package. ) 
-Expanded db CRUD
-DAL
+Expanded db CRUD ( Dropp denne modulen for nå)
+DAL (Dropp denne modulen for nå)
 Error handling, logging
 Input validation
 Authentication authorisation
