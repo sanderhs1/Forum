@@ -4,6 +4,9 @@ Async db access ( Har opprettet Async Db, må få testet med å legge data - Pet
 Db seeding ( har lagt til db seeding men får ikke installert en NuGet Package. ) 
 Expanded db CRUD ( Dropp denne modulen for nå)
 DAL (Dropp denne modulen for nå)
+
+Legge inn comments sånn at vi skjønner noe av koden
+
 Error handling, logging
 Input validation
 Authentication authorisation
