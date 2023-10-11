@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Forum.Models;
 
-public class ListingDbContext : DbContext
+public class ListingDbContext : IdentityDbContext
 {
     public ListingDbContext(DbContextOptions<ListingDbContext> options) : base(options)
     {

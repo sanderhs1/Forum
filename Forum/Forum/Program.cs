@@ -24,6 +24,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
+app.UseAuthentication();
+
 app.MapDefaultControllerRoute();
 
 app.Run();
