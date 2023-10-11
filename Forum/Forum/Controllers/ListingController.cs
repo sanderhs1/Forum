@@ -16,7 +16,7 @@ namespace Forum.Controllers
             _listingDbContext = listingDbContext;
         }
 
-        public List<Rent> RentCosole()
+        public List<Rent> RentConsole()
         {
             return _listingDbContext.Rents.ToList();
         }
