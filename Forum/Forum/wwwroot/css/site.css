@@ -14,5 +14,11 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    background-image: url("C:\Users\aliso\Source\Repos\Forum\Forum\Forum\wwwroot\images\Hus1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
