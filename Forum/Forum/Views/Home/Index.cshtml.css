@@ -1,3 +1,24 @@
-﻿h1 {
-    color: red;
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    background-image: url("C:\Users\aliso\Source\Repos\Forum\Forum\Forum\wwwroot\images\Hus1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
