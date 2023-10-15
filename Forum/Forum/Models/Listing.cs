@@ -14,7 +14,7 @@ namespace Forum.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "The Price must be greater than 0. ")]
         public decimal Price { get; set; }
 
-        [StringLength(400)]
+        [StringLength(300)]
         public string? Description { get; set; }
 
         public string? ImageUrl { get; set; }
