@@ -2,9 +2,13 @@ using Forum.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
+using Microsoft.AspNetCore.Identity;
+using Forum.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection");builder.Services.AddDbContext<ListingDbContext>(options =>
+    options.UseSqlServer(connectionString));builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ListingDbContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

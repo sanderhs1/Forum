@@ -70,7 +70,7 @@ namespace Forum.Controllers
                 _listingDbContext.Listings.Add(listing);
                 await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
-                _logger.LogWarning("[ListingController] Listings creation failed {@listing}", listing);
+               // Feil her _logger.LogWarning("[ListingController] Listings creation failed {@listing}", listing);
             }
             return View();
         }
