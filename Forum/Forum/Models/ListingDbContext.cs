@@ -8,7 +8,7 @@ public class ListingDbContext : IdentityDbContext
 {
     public ListingDbContext(DbContextOptions<ListingDbContext> options) : base(options)
     {
-        Database.EnsureCreated(); 
+        //Database.EnsureCreated(); 
     }
 
     public DbSet<Listing> Listings { get; set; }

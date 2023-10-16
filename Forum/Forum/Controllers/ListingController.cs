@@ -52,7 +52,7 @@ namespace Forum.Controllers
         {
             var listing = await _listingDbContext.Listings.FirstOrDefaultAsync(i => i.ListingId == id);
             if (listing == null)
-                return NotFound();
+                return BadRequest("Listing is not found.");
             return View(listing);
         }
 
@@ -72,6 +72,7 @@ namespace Forum.Controllers
                 return RedirectToAction(nameof(Table));
                // Feil her _logger.LogWarning("[ListingController] Listings creation failed {@listing}", listing);
             }
+            // Tror kanskje at _logger skal være her istedenfor
             return View();
         }
 
@@ -81,7 +82,8 @@ namespace Forum.Controllers
             var listing = await _listingDbContext.Listings.FindAsync(id);
             if(listing == null)
             {
-                return NotFound();
+                _logger.LogError("[ListingController] Listing not found when updating the ListingId{ListingId:0000}", id);
+                return BadRequest("Listing not found for the ListingId");
             }
             return View(listing);
         }
@@ -94,6 +96,7 @@ namespace Forum.Controllers
                 await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Table));
             }
+            _logger.LogWarning("[ListingController] Listing update failed {@listing}", listing);
             return View(listing);
         }
 
@@ -103,7 +106,8 @@ namespace Forum.Controllers
             var listing = await _listingDbContext.Listings.FindAsync(id);
             if (listing == null)
             {
-                return NotFound();
+                _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId:0000}", listing);
+                return BadRequest("Listing not found for the ListingId");
             }
             return View(listing);
         }

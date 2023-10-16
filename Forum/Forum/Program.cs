@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using Microsoft.AspNetCore.Identity;
-using Forum.Areas.Identity.Data;
+//using Forum.Areas.Identity.Data; Kommenter dette ut fordi at det failer
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection");builder.Services.AddDbContext<ListingDbContext>(options =>
