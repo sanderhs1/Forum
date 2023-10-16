@@ -7,7 +7,11 @@ using Forum.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection");builder.Services.AddDbContext<ListingDbContext>(options =>
-    options.UseSqlServer(connectionString));builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    options.UseSqlServer(connectionString));
+
+// Når scaffolding ble lagt til kom det en til listingdbcontext i et annet folder som mest sannsynlig lager feil vet ikke hvorfor den er der eller om den skal være der
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ListingDbContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
