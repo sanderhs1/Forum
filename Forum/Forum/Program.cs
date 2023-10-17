@@ -1,8 +1,8 @@
-using Forum.Models;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using Microsoft.AspNetCore.Identity;
+using Forum.DAL;
 //using Forum.Areas.Identity.Data; Kommenter dette ut fordi at det failer
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +36,8 @@ loggerConfiguration.Filter.ByExcluding(e => e.Properties.TryGetValue("SourceCont
 
 var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
+
+builder.Services.AddScoped<InterListingRepository, ListingRepository>();
 
 var app = builder.Build();
 

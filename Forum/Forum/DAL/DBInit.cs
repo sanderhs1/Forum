@@ -1,7 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Forum.Models;
+using Microsoft.EntityFrameworkCore;
 
 
-namespace Forum.Models;
+namespace Forum.DAL;
 
 
 public static class DBInit

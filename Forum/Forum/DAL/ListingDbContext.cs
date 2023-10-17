@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Forum.Models;
 
-namespace Forum.Models;
+namespace Forum.DAL;
 
 public class ListingDbContext : IdentityDbContext
 {

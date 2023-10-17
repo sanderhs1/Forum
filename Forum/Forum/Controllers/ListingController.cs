@@ -1,137 +1,142 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Forum.Models;
 using Forum.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using MyShop.Dal;
+using Forum.DAL;
 
-namespace Forum.Controllers
+namespace Forum.Controllers;
+
+public class ListingController : Controller
 {
-    public class ListingController : Controller
+    //private readonly ListingDbContext _listingDbContext;
+
+    private readonly InterListingRepository _listingRepository;
+    private readonly ILogger<ListingController> _logger;
+
+    public ListingController(InterListingRepository listingRepository, ILogger<ListingController> logger)
     {
-        private readonly ListingDbContext _listingDbContext;
-        private readonly ILogger<ListingController> _logger;
+        _logger = logger;
+        _listingRepository = listingRepository;
+    }
 
-        public ListingController(ListingDbContext listingDbContext, ILogger<ListingController> logger)
-        {
-            _logger = logger;
-            _listingDbContext = listingDbContext;
-        }
+    //public List<Rent> RentConsole()
+    //{
+    //    return ListingRepository.Rents.ToList();
 
-        public List<Rent> RentConsole()
-        {
-            return _listingDbContext.Rents.ToList();
+    //}
+    
 
-        }
+    public async Task<IActionResult>Table()
+    {
         
-
-        public async Task<IActionResult>Table()
+        var listings = await _listingRepository.GetAll();
+        if (listings == null)
         {
-            _logger.LogInformation("This is an information message");
-            _logger.LogWarning("This is a warning message");
-            _logger.LogError("This is an error message");
-            List<Listing> listings = await _listingDbContext.Listings.ToListAsync();
-            var listingListViewModel = new ListingListViewModel(listings, "Table");
-            return View(listingListViewModel);
+            _logger.LogError("[ListingController] Listing list not found while executing _lisitngRepository.GetAll()");
+            return NotFound("Listings list not found");
+                
         }
-        // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes
-        public async Task<IActionResult> Grid()
+        var listingListViewModel = new ListingListViewModel(listings, "Table");
+        return View(listingListViewModel);
+    }
+    // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes
+    public async Task<IActionResult> Grid()
+    {
+
+        var listings = await _listingRepository.GetAll();
+        if (listings == null)
         {
+            _logger.LogError("[ListingController] Listings list not found while executing _listingRepository.GetAll()");
+            return NotFound("Listings list not found");
+        }
+        var listingListViewModel = new ListingListViewModel(listings, "Grid");
+        return View(listingListViewModel);
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        var listing = await _listingRepository.GetListingById(id);
+        if (listing == null)
+        {
+            _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId: 0000}", id);
+            return NotFound("Listings list not found for the ListingId");
+        }
             
-            List<Listing> listings = await _listingDbContext.Listings.ToListAsync();
-            if (listings == null)
-            {
-                _logger.LogError("[ListingController] Listing is not found");
-                return NotFound("Listings not found");
-            }
-            var listingListViewModel = new ListingListViewModel(listings, "Grid");
-            return View(listingListViewModel);
-        }
+        return View(listing);
+    }
 
-        public async Task<IActionResult> Details(int id)
-        {
-            var listing = await _listingDbContext.Listings.FirstOrDefaultAsync(i => i.ListingId == id);
-            if (listing == null)
-                return BadRequest("Listing is not found.");
-            return View(listing);
-        }
+    [Authorize]
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+    }
 
-        [Authorize]
-        [HttpGet]
-        public IActionResult Create()
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult>Create(Listing listing)
+    {
+        if (ModelState.IsValid)
         {
-            return View();
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult>Create(Listing listing)
-        {
-            if (ModelState.IsValid)
-            {
-                _listingDbContext.Listings.Add(listing);
-                await _listingDbContext.SaveChangesAsync();
+            bool returnOk = await _listingRepository.Create(listing);
+            if (returnOk)
                 return RedirectToAction(nameof(Table));
-               // Feil her _logger.LogWarning("[ListingController] Listings creation failed {@listing}", listing);
-            }
-            // Tror kanskje at _logger skal være her istedenfor
-            return View();
         }
+        _logger.LogWarning("[LisitngController] Listing creation failed {@listing}", listing);
+        return View(listing);
+    }
 
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult>Update(int id)
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult>Update(int id)
+    {
+        var listing = await _listingRepository.GetListingById(id);
+        if(listing == null)
         {
-            var listing = await _listingDbContext.Listings.FindAsync(id);
-            if(listing == null)
-            {
-                _logger.LogError("[ListingController] Listing not found when updating the ListingId{ListingId:0000}", id);
-                return BadRequest("Listing not found for the ListingId");
-            }
-            return View(listing);
+            _logger.LogError("[ListingController] Listing not found when updating the ListingId{ListingId:0000}", id);
+            return BadRequest("Listing not found for the ListingId");
         }
+        return View(listing);
+    }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult>Update(Listing listing)
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult>Update(Listing listing)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
-            {
-                _listingDbContext.Listings.Update(listing);
-                await _listingDbContext.SaveChangesAsync();
+            bool returnOk = await _listingRepository.Update(listing);
+            if (returnOk)
                 return RedirectToAction(nameof(Table));
-            }
-            _logger.LogWarning("[ListingController] Listing update failed {@listing}", listing);
-            return View(listing);
         }
+        _logger.LogWarning("[ListingController] Listing update failed {@listing}", listing);
+        return View(listing);
+    }
 
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult>Delete(int id)
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult>Delete(int id)
+    {
+        var listing = await _listingRepository.GetListingById(id);
+        if (listing == null)
         {
-            var listing = await _listingDbContext.Listings.FindAsync(id);
-            if (listing == null)
-            {
-                _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId:0000}", listing);
-                return BadRequest("Listing not found for the ListingId");
-            }
-            return View(listing);
+            _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId:0000}", listing);
+            return BadRequest("Listing not found for the ListingId");
         }
+        return View(listing);
+    }
 
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult>DeleteConfirmed(int id)
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult>DeleteConfirmed(int id)
+    {
+        bool returnOk = await _listingRepository.Delete(id);
+        if (!returnOk)
         {
-            var listing = await _listingDbContext.Listings.FindAsync(id);
-            if (listing == null)
-            {
-                return NotFound();
-            }
-            _listingDbContext.Listings.Remove(listing);
-            await _listingDbContext.SaveChangesAsync();
-            return RedirectToAction(nameof(Table));
+            _logger.LogError("[ListingController] Listing deletion failed for the ListingId {ListingId:0000}", id);
+            return BadRequest("Listing deletion failed");
         }
+        return RedirectToAction(nameof(Table));
     }
 }
