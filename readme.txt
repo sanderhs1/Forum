@@ -7,7 +7,7 @@ LISTE SOM MÅ GJØRES:
 - DAL ( Ferdig ) 
 - Error handling, logging ( Ferdig )
 - Input validation ( Ferdig ) 
-- Authentication authorisation (ferdig?)
+- Authentication authorisation (Mangler Hashing, Salting and Configuration)
 - Unit testing
 - Design
 - Legge inn comments sånn at vi skjønner noe av koden
