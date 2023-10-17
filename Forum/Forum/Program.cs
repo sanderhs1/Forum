@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Identity;
 //using Forum.Areas.Identity.Data; Kommenter dette ut fordi at det failer
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection");builder.Services.AddDbContext<ListingDbContext>(options =>
-    options.UseSqlServer(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection") ?? throw new
+    InvalidOperationException("Connection string 'ListingDbContextConnection' not found");
 
-// Når scaffolding ble lagt til kom det en til listingdbcontext i et annet folder som mest sannsynlig lager feil vet ikke hvorfor den er der eller om den skal være der
-
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ListingDbContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
+builder.Services.AddSession();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
@@ -43,6 +44,12 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 app.UseStaticFiles();
+
+app.UseSession();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.UseAuthentication();
 
