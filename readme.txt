@@ -11,6 +11,7 @@ LISTE SOM MÅ GJØRES:
 - Unit testing
 - Design
 - Legge inn comments sånn at vi skjønner noe av koden
+-Legge inn sånn at brukere bare kan edite / slette sine egne listings
 
 FEATURES:
 - Sort f.eks (billigst, størst, dyrest etc.) / Filter
