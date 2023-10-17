@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Forum.Models;
 using Forum.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using MyShop.Dal;
 
 namespace Forum.Controllers
 {
@@ -56,12 +58,14 @@ namespace Forum.Controllers
             return View(listing);
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult>Create(Listing listing)
         {
@@ -76,6 +80,7 @@ namespace Forum.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult>Update(int id)
         {
@@ -87,6 +92,8 @@ namespace Forum.Controllers
             }
             return View(listing);
         }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult>Update(Listing listing)
         {
@@ -100,6 +107,7 @@ namespace Forum.Controllers
             return View(listing);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult>Delete(int id)
         {
@@ -112,6 +120,7 @@ namespace Forum.Controllers
             return View(listing);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult>DeleteConfirmed(int id)
         {
