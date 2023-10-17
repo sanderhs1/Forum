@@ -9,13 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ListingDbContextConnection") ?? throw new
     InvalidOperationException("Connection string 'ListingDbContextConnection' not found");
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
+builder.Services.AddDefaultIdentity<IdentityUser>() // configure it?
     .AddEntityFrameworkStores<ListingDbContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
-builder.Services.AddSession();
+builder.Services.AddSession(); // Configure it?
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
