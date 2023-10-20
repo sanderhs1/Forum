@@ -1,39 +1,32 @@
 ﻿@model IEnumerable<Listing>
-
+    <!-- Rett opp tekst + bilde posisjon, Fjerne ListingId, legg inn andre variabler, legge inn sånn at man kan klikke inn på listing og få mer oversikt over akk den listingen-->
 <div class="container">
-     <table class='table table-striped'>
-        <tr>
-            <th>ListingId</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-        @foreach (var listing in Model)
-        {
-           <tr>
-               <td>@listing.ListingId</td>
-               <td>
-                   <a asp-controller="Listing"
-                   asp-action="Description"
-                   asp-route-id="@listing.ListingId">@listing.Name</a>
-               </td>
-               <td>@listing.Price.ToString("0.00 NOK")</td>
-               <td>@listing.Description</td>
-               <td>
-                   <img src="@listing.ImageUrl" alt="Listing Image" style="max-width: 80px; max-height: 80px;"/>
-               </td>
-               <td>
-                   <a asp-action="Update" asp-route-id="@listing.ListingId">Update</a>
-                   <a asp-action="Delete" asp-route-id="@listing.ListingId">Delete</a>
-               </td>
-            </tr>
-        }
-     </table>
-     <p>
-        <a class="btn btn-secondary"
-        asp-controller="Listing"
-        asp-action="Create">Create new Listing</a>
-        </p>
+    @foreach (var listing in Model)
+    {
+        <div class="listing-box" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
+            <div>
+                <strong>ListingId:</strong> @listing.ListingId
+            </div>
+            <div>
+                <strong>Name:</strong> <a asp-controller="Listing" asp-action="Description" asp-route-id="@listing.ListingId">@listing.Name</a>
+            </div>
+            <div>
+                <strong>Price:</strong> @listing.Price.ToString("0.00 NOK")
+            </div>
+            <div>
+                <strong>Description:</strong> @listing.Description
+            </div>
+            <div>
+                <strong>Image:</strong>
+                <img src="@listing.ImageUrl" alt="Listing Image" style="max-width: 80px; max-height: 80px;" />
+            </div>
+            <div class="action-links">
+                <a asp-action="Update" asp-route-id="@listing.ListingId">Update</a>
+                <a asp-action="Delete" asp-route-id="@listing.ListingId">Delete</a>
+            </div>
+        </div>
+    }
+    <p>
+        <a class="btn btn-secondary" asp-controller="Listing" asp-action="Create">Create new Listing</a>
+    </p>
 </div>
