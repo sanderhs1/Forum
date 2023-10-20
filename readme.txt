@@ -1,19 +1,13 @@
 FRIST 31.OKT.2023 KL.12
 
 LISTE SOM MÅ GJØRES:
-- Fjerne grid/table view endre til et type view, som passer best.
-- Async db access ( Ferdig) 
-- Db seeding ( Ferdig ) 
 - Expanded db CRUD ( Dropp denne modulen for nå)
-- Repository Pattern ( Ferdig ) 
-- DAL ( Ferdig ) 
-- Error handling, logging ( Ferdig )
-- Input validation ( Ferdig ) 
 - Authentication authorisation (Mangler Hashing, Salting and Configuration Ikke helt ferdig)
 - Unit testing
 - Design (Ikke noe ennå)
-- Legge inn comments sånn at vi skjønner noe av koden
-- Legge inn sånn at brukere bare kan edite / slette sine egne listings
+- Oppdatere Listing View, til å legge til dato, flere bilder pris per natt etc.
+- Lage en side for order
+- Gjøre sånn at bare lageren / admin av listing kan endre eller fjerne
 
 FEATURES:
 - Sort f.eks (billigst, størst, dyrest etc.) / Filter
