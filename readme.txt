@@ -1,3 +1,5 @@
+FRIST 31.OKT.2023 KL.12
+
 LISTE SOM MÅ GJØRES:
 - Fjerne grid/table view endre til et type view, som passer best.
 - Async db access ( Ferdig) 
@@ -7,11 +9,11 @@ LISTE SOM MÅ GJØRES:
 - DAL ( Ferdig ) 
 - Error handling, logging ( Ferdig )
 - Input validation ( Ferdig ) 
-- Authentication authorisation (Mangler Hashing, Salting and Configuration)
+- Authentication authorisation (Mangler Hashing, Salting and Configuration Ikke helt ferdig)
 - Unit testing
-- Design
+- Design (Ikke noe ennå)
 - Legge inn comments sånn at vi skjønner noe av koden
--Legge inn sånn at brukere bare kan edite / slette sine egne listings
+- Legge inn sånn at brukere bare kan edite / slette sine egne listings
 
 FEATURES:
 - Sort f.eks (billigst, størst, dyrest etc.) / Filter
