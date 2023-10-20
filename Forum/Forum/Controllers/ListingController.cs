@@ -139,4 +139,32 @@ public class ListingController : Controller
         }
         return RedirectToAction(nameof(Table));
     }
+
+    services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    // Configuring password
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 8;
+
+    // Configuring lockout settings
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(60);
+
+    // Each user requires a unique email
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Setting the idle timeout for the session
+    options.Cookie.Name = ".AdventureWorks.Session"; // Setting the name of the session cookie
+    options.Cookie.IsEssential = true; // Indicating whether the session cookie is essential
+});
+
 }
+
