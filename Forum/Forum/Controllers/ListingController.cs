@@ -145,6 +145,18 @@ public class ListingController : Controller
         }
         return RedirectToAction(nameof(Table));
     }
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> ListingView(int id)
+    {
+        var listing = await _listingRepository.GetListingById(id);
+        if (listing == null)
+        {
+            _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId:0000}", listing);
+            return BadRequest("Listing not found for the ListingId");
+        }
+        return View(listing);
+    }
 
 
 
