@@ -79,6 +79,12 @@ public class ListingController : Controller
     {
         if (ModelState.IsValid)
         {
+            if (listing.Price <= 0)
+            {
+                ModelState.AddModelError("PricePerNight", "Price per night must be more than 0.");
+                return View(listing);
+            }
+
             bool returnOk = await _listingRepository.Create(listing);
             if (returnOk)
                 return RedirectToAction(nameof(Table));
@@ -139,6 +145,8 @@ public class ListingController : Controller
         }
         return RedirectToAction(nameof(Table));
     }
+
+
 
 }
 
