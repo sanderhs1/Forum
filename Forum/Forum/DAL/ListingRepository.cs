@@ -14,7 +14,7 @@ public class ListingRepository : InterListingRepository
         _db = db;
         _logger = logger;
     }
-
+    // Warning her
     public async Task<IEnumerable<Listing>?> GetAll()
     {
         try
@@ -90,7 +90,7 @@ public class ListingRepository : InterListingRepository
         }
 
         catch(Exception e)
-        {
+        { // warning her
             _logger.LogError("[ListingController] listing deletion failed for the ListingId {ListingId:0000, error message: {e}", id, e.Message);
             return false;
         }
