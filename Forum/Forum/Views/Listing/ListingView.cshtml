@@ -20,5 +20,8 @@
         <dt class="col-sm-2">Image URL</dt>
     </dl>
     <img src="@Model.ImageUrl" />
-    <button>Order</button>
+    
+    <a class="btn btn-secondary"
+    asp-controller="Rent"
+    asp-action="Rent">Rent this Order</a>
 </div>

@@ -10,4 +10,6 @@ public class Rent
 
     public virtual List<RentListing>? RentListings { get; set; }
     public decimal TotalPrice { get; set; }
+
+    public virtual Listing ListingId { get; set; } = default!;
 }
