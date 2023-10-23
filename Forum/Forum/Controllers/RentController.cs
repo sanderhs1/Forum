@@ -5,6 +5,7 @@ using Forum.DAL;
 using Forum.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Cryptography.Xml;
 
 
 // Create OrderItem er vår RentView
@@ -49,6 +50,61 @@ namespace Forum.Controllers
                 }).ToList(),
             };
             return View(rentViewModel);
+        }
+
+        public async Task<IActionResult> RentView(RentListing rentListing)
+        {
+            try
+            {
+                var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
+                var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
+
+                if(newListing == null || newRent == null)
+                {
+                    return BadRequest("Listing or Rent not found");
+
+                }
+
+                var newRentListing = new RentListing
+                {
+                    ListingId = rentListing.ListingId,
+                    Listing = newListing,
+                    RentId = rentListing.RentId,
+                    Rent = newRent,
+
+                };
+
+                newRentListing.RentListingPrice = newRentListing.Listing.Price;
+
+                if (newRentListing.Listing == null || newRentListing.Rent == null)
+                {
+                    var listings = await _listingDbContext.Listings.ToListAsync();
+                    var rents = await _listingDbContext.Rents.ToListAsync();
+                    var rentViewModel = new RentViewModel
+                    {
+                        RentListing = rentListing,
+                        ListingSelectList = listings.Select(listing => new SelectListItem
+                        {
+                            Value = listing.ListingId.ToString(),
+                            Text = listing.ListingId.ToString() + ": " + listing.Name
+                        }).ToList(),
+
+                        RentSelectList = rents.Select(rent => new SelectListItem
+                        {
+                            Value = rent.RentId.ToString(),
+                            Text = "Rent" + rent.RentId.ToString() + ", Date: " + rent.RentDate + ", Customer: " + rent.Customer?.CustomerName ?? "Cusotmer not Found"
+                        }).ToList(),
+                    };
+                    return View(rentViewModel);
+                }
+                _listingDbContext.RentListings.Add(newRentListing);
+                await _listingDbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Table));
+            }
+            catch
+            {
+                return BadRequest("RentListing creation failed.");
+            }
         }
         public IActionResult Index()
         {
