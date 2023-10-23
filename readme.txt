@@ -5,8 +5,8 @@ LISTE SOM MÅ GJØRES:
 - Authentication authorisation (Mangler Hashing, Salting and Configuration Ikke helt ferdig)
 - Unit testing
 - Design (Ikke noe ennå)
-- Oppdatere Listing View, til å legge til dato, flere bilder pris per natt etc.
-- Lage en side for order
+- Oppdatere Listing View, til å legge til dato, flere bilder pris per natt etc. 
+- Lage en side for order ( Side for å bestille listings er nå fikset, det mangler å finpusse og legge til dropdown kalender )
 - Gjøre sånn at bare lageren / admin av listing kan endre eller fjerne
 
 FEATURES:
