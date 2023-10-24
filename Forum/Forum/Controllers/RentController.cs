@@ -110,5 +110,10 @@ namespace Forum.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> RentOrder()
+        {
+            List<Rent> rents = await _listingDbContext.Rents.ToListAsync();
+            return View(rents);
+        }
     }
 }
