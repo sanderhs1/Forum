@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label asp-for="RentListing.RentListingPrice"></label><span class="text-danger">*</span>
-        <input aps-for="RentListing.RentListingPrice" class="form-control" />
+        <input asp-for="RentListing.RentListingPrice" class="form-control" />
         <span asp-validation-for="RentListing.RentListingPrice" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -52,6 +52,6 @@
         </script>
     }
     <button type="submit" class="btn btn-primary">Rent</button>
-    <a asp-action="Table" class="btn btn-secondary">Back to Listing Table</a>
+    <a asp-controller="Listing" asp-action="Table" class="btn btn-secondary">Back to Listing Table</a>
 </form>
 
