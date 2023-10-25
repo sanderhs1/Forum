@@ -16,6 +16,8 @@ public class ListingDbContext : IdentityDbContext
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Rent> Rents { get; set; }
     public DbSet<RentListing> RentListings { get; set; }
+    public DbSet<RentListing> CheckInDate { get; set; }
+    public DbSet<RentListing> CheckOutDate { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
