@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Forum.ViewModels;
 
-public class RentViewModel
+public class CreateRentListingViewModel
 {
     public RentListing RentListing { get; set; } = default!;
     public List<SelectListItem> ListingSelectList { get; set; } = default!;

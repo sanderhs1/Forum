@@ -1,11 +1,11 @@
-﻿@model RentViewModel
+﻿@model CreateRentListingViewModel
 
 <!-- Endre sånn at ListingId velges automatisk og sånn at man ikke trenger å skrive den-->
 <h2>Rent this Listing!</h2>
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="RentView">
+<form asp-action="CreateRentListing">
     <div class="form-group">
         <label asp-for="RentListing.ListingId"></label><span class="text-danger">*</span>
         <input asp-for="RentListing.ListingId" class="form-control" readonly />

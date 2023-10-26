@@ -1,0 +1,13 @@
+﻿@model IEnumerable<RentListing>
+
+    <table>
+        <tr>
+            <th>RentListingId</th>
+        </tr>
+        @foreach (var rentListing in Model)
+    {
+        <tr>
+            <td>@rentListing.RentListingId</td>
+        </tr>
+    }
+</table>

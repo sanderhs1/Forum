@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum", "Forum\Forum.csproj", "{F515E9BC-C4FB-4161-BC64-A5C24871ECBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitTestForum", "xUnitTestForum\xUnitTestForum.csproj", "{25EB5AE6-5866-4ED8-8F06-744B7E6F1F34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestForum", "xUnitTestForum\xUnitTestForum.csproj", "{25EB5AE6-5866-4ED8-8F06-744B7E6F1F34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

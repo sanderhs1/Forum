@@ -29,11 +29,11 @@ namespace Forum.Controllers
         [Authorize]
         [HttpGet]
 
-        public async Task<IActionResult> RentView(int ListingId)
+        public async Task<IActionResult> CreateRentListing(int ListingId)
         {
             var listings = await _listingDbContext.Listings.ToListAsync();
             var rents = await _listingDbContext.Rents.ToListAsync();
-            var rentViewModel = new RentViewModel
+            var createRentListingViewModel = new CreateRentListingViewModel
             {
                 RentListing = new RentListing { ListingId = ListingId},
 
@@ -51,10 +51,10 @@ namespace Forum.Controllers
                 CheckInDate = DateTime.Now,
                 CheckOutDate = DateTime.Now.AddDays(1)
             };
-            return View(rentViewModel);
+            return View(createRentListingViewModel);
         }
 
-        public async Task<IActionResult> RentView(RentListing rentListing)
+        public async Task<IActionResult> CreateRentListing(RentListing rentListing)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Forum.Controllers
                 {
                     var listings = await _listingDbContext.Listings.ToListAsync();
                     var rents = await _listingDbContext.Rents.ToListAsync();
-                    var rentViewModel = new RentViewModel
+                    var createRentListingViewModel = new CreateRentListingViewModel
                     {
                         RentListing = rentListing,
                         ListingSelectList = listings.Select(listing => new SelectListItem
@@ -99,7 +99,7 @@ namespace Forum.Controllers
                             Text = "Rent" + rent.RentId.ToString() + ", Date: " + rent.CheckInDate + ", Customer: " + rent.Customer?.CustomerName ?? "Cusotmer not Found"
                         }).ToList(),
                     };
-                    return View(rentViewModel);
+                    return View(createRentListingViewModel);
                 }
                 _listingDbContext.RentListings.Add(newRentListing);
                 await _listingDbContext.SaveChangesAsync();
@@ -110,10 +110,5 @@ namespace Forum.Controllers
                 return BadRequest("RentListing creation failed.");
             }
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
-
     }
 }
