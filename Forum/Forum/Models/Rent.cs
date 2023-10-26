@@ -15,7 +15,7 @@ public class Rent
 
     public int CustomerId { get; set; }
 
-    public virtual Customer Customer { get; set; } = default!;
+    public virtual Customer Customer { set; get; } = default!;
 
     public virtual List<RentListing>? RentListings { get; set; }
     public decimal TotalPrice { get; set; }
