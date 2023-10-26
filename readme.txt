@@ -18,5 +18,9 @@ FEATURES:
 - Antall senger / størrelse på listing controller ( flere ting trengs )
 - Mulig rating system?
 
+Feil:
+
+Noe feil med sammenhengen av RentListing - Rent- RentController (Mulig at det er noe feil med variabler der, kan ikke legge til ting i databasen selv direkte)
+
 FERDIG:
 - Unit testing ( Ferdig, OK med testene ) 
