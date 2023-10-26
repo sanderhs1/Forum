@@ -8,7 +8,7 @@
 <form asp-action="RentView">
     <div class="form-group">
         <label asp-for="RentListing.ListingId"></label><span class="text-danger">*</span>
-        <input asp-for="RentListing.ListingId" class="form-control"/>
+        <input asp-for="RentListing.ListingId" class="form-control" readonly/>
         <span asp-validation-for="RentListing.ListingId" class="text-danger"></span>
     </div>
     <div class="form-group">

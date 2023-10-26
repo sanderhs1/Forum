@@ -19,7 +19,8 @@
         <h1>
             @Model.Description
         </h1>
-        <a asp-controller="Rent" asp-action="RentView">Rent this listing</a>
+        <a asp-controller="Rent" asp-action="RentView" asp-route-listingId="@Model.ListingId">Rent this listing</a>
+
     </div>
 </body>
 

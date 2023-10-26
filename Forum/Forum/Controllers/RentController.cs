@@ -29,13 +29,13 @@ namespace Forum.Controllers
         [Authorize]
         [HttpGet]
 
-        public async Task<IActionResult> RentView()
+        public async Task<IActionResult> RentView(int ListingId)
         {
             var listings = await _listingDbContext.Listings.ToListAsync();
             var rents = await _listingDbContext.Rents.ToListAsync();
             var rentViewModel = new RentViewModel
             {
-                RentListing = new RentListing(),
+                RentListing = new RentListing { ListingId = ListingId},
 
                 ListingSelectList = listings.Select(listing => new SelectListItem
                 {
