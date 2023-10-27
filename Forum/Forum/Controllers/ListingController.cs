@@ -4,6 +4,7 @@ using Forum.Models;
 using Forum.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Forum.Controllers;
 
@@ -155,7 +156,30 @@ public class ListingController : Controller
             _logger.LogError("[ListingController] Listing not found for the ListingId {ListingId:0000}", listing);
             return BadRequest("Listing not found for the ListingId");
         }
-        return View(listing);
+
+        var listings = await _listingRepository.GetAllListings();
+        var rents = await _listingRepository.GetAllRents();
+
+        var viewModel = new ListingWithRentVM
+        {
+            ListingDetails = listing,
+            RentDetails = new CreateRentListingViewModel
+            {
+                RentListing = new RentListing { ListingId = listing.ListingId },
+                ListingSelectList = listings.Select(l => new SelectListItem
+                {
+                    Value = l.ListingId.ToString(),
+                    Text = $"{l.ListingId}: {l.Name}"
+                }).ToList(),
+                RentSelectList = rents.Select(r => new SelectListItem
+                {
+                    Value = r.RentId.ToString(),
+                    Text = $"Rent {r.RentId}"  // fixed here
+                }).ToList()
+            }
+        };
+
+        return View(viewModel);
     }
 
 

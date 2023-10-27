@@ -14,6 +14,14 @@ public class ListingRepository : InterListingRepository
         _db = db;
         _logger = logger;
     }
+    public async Task<List<RentListing>> GetAllRents()
+    {
+        return await _db.RentListings.ToListAsync();  // assuming your DbSet is named RentListings
+    }
+    public async Task<List<Listing>> GetAllListings()
+    {
+        return await _db.Listings.ToListAsync();
+    }
     // Warning her
     public async Task<IEnumerable<Listing>?> GetAll()
     {

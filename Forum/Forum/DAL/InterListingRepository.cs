@@ -7,6 +7,9 @@ namespace Forum.DAL
         Task<IEnumerable<Listing>> GetAll();
         Task<Listing?>GetListingById(int id);
 
+        Task<List<Listing>> GetAllListings();
+        Task<List<RentListing>> GetAllRents();
+
         Task <bool>Create(Listing listing);
 
         Task <bool>Update(Listing listing);

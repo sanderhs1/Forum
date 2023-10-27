@@ -1,4 +1,4 @@
-﻿@model Listing
+﻿@model ListingWithRentVM
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,21 +42,16 @@
     <div class="container mt-5">
         <div class="listing-container row">
             <div class="listing-image-container col-md-7">
-                <img src="@Model.ImageUrl" alt="@Model.Name" class="img-thumbnail" />
-                <img src="@Model.ImageUrl1" alt="@Model.Name" class="img-thumbnail" />
+                <img src="@Model.ListingDetails.ImageUrl" alt="@Model.ListingDetails.Name" class="img-thumbnail" />
+                <img src="@Model.ListingDetails.ImageUrl1" alt="@Model.ListingDetails.Name" class="img-thumbnail" />
                 <!-- Add more images as needed -->
             </div>
             <div class="listing-details col-md-5 bg-light">
-                <h2>@Model.Name</h2>
-                <p>@Model.Description</p>
-                <!-- Render the Rent Form Partial -->
-                @{
-                    var rentVM = new CreateRentListingViewModel { RentListing = new RentListing { ListingId = Model.ListingId } };
-                    await Html.RenderPartialAsync("_RentFormPartial", rentVM);
-                }
+                <partial name="_CreateRentListingPartial" model="@Model.RentDetails" />
+                <h2>@Model.ListingDetails.Name</h2>
+                <p>@Model.ListingDetails.Description</p>
                 <div class="listing-footer">
-                    <h3>@Model.Price</h3>
-                    <a asp-controller="Rent" asp-action="CreateRentListing" asp-route-listingId="@Model.ListingId" asp-route-listingId="@Model.ListingId" class="btn btn-primary">Rent this listing</a>
+                    <h3>@Model.ListingDetails.Price</h3>
                 </div>
             </div>
         </div>
