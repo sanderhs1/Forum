@@ -13,21 +13,17 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="RentListing.RentId"></label><span class="text-danger" *></span>
-        <input asp-for="RentListing.RentId" class="form-control" />
+        <label asp-for="RentListing.RentId"></label><span class="text-danger">*</span>
+        <select asp-for="RentListing.RentId" asp-items="Model.RentSelectList" class="form-control">
+            <option value="">Select an order...</option>
+        </select>
         <span asp-validation-for="RentListing.RentId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="RentListing.RentListingPrice"></label><span class="text-danger">*</span>
-        <input asp-for="RentListing.RentListingPrice" class="form-control" />
-        <span asp-validation-for="RentListing.RentListingPrice" class="text-danger"></span>
+        <label asp-for="RentListing.DaysStayed"></label><span class="text-danger" *></span>
+        <input asp-for="RentListing.DaysStayed" class="form-control" />
+        <span asp-validation-for="RentListing.DaysStayed" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="RentListing.RentListingId"></label><span class="text-danger">*</span>
-        <input asp-for="RentListing.RentListingId" class="form-control"  />
-        <span asp-validation-for="RentListing.RentListingId" class="text-danger"></span>
-    </div>
-
     <button type="submit" class="btn btn-primary">Rent</button>
     <a asp-controller="Listing" asp-action="Table" class="btn btn-secondary">Back to Listing Table</a>
 </form>

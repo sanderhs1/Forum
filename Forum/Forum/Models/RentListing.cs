@@ -13,4 +13,5 @@ public class RentListing
     public int RentId { get; set; }
     public virtual Rent Rent { get; set; } = default!;
     public decimal RentListingPrice { get; set; }
+    public int DaysStayed { get; set; }
 }

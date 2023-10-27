@@ -54,30 +54,31 @@ namespace Forum.Controllers
         }
 
         public async Task<IActionResult> CreateRentListing(RentListing rentListing)
+{
+    try
+    {
+        var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
+        var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
+
+        if(newListing == null || newRent == null)
         {
-            try
-            {
-                var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
-                var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
+            return BadRequest("Listing or Rent not found");
+        }
 
-                if(newListing == null || newRent == null)
-                {
-                    return BadRequest("Listing or Rent not found");
+        var newRentListing = new RentListing
+        {
+            ListingId = rentListing.ListingId,
+            Listing = newListing,
+            RentId = rentListing.RentId,
+            DaysStayed = rentListing.DaysStayed,
+            Rent = newRent,
+        };
 
-                }
 
-                var newRentListing = new RentListing
-                {
-                    ListingId = rentListing.ListingId,
-                    Listing = newListing,
-                    RentId = rentListing.RentId,
-                    Rent = newRent,
 
-                };
+                newRentListing.RentListingPrice = rentListing.DaysStayed * newRentListing.Listing.Price;
 
-                newRentListing.RentListingPrice = newRentListing.Listing.Price;
-
-                if (newRentListing.Listing == null || newRentListing.Rent == null)
+                if (newRentListing.Listing == null || newRentListing.Rent == null || newRentListing.DaysStayed <= 0)
                 {
                     var listings = await _listingDbContext.Listings.ToListAsync();
                     var rents = await _listingDbContext.Rents.ToListAsync();

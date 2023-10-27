@@ -13,5 +13,5 @@ public class Rent
     public virtual List<RentListing>? RentListings { get; set; }
     public decimal TotalPrice { get; set; }
 
-    
+
 }
