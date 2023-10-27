@@ -7,6 +7,9 @@ namespace Forum.Models
     {
         public int ListingId { get; set; }
 
+        [Range(1, 100, ErrorMessage = "Number of rooms should be between 1 and 100.")]
+        public int AntallRom { get; set; }
+
         [RegularExpression(@"[0-9a-zA-ZæøåÆØÅ. \-]{2,20}", ErrorMessage = "The Name must be numbers or letters and between 2 to 20 characters.")]
         [Display(Name = "Item name")]
         public string Name { get; set; } = string.Empty;

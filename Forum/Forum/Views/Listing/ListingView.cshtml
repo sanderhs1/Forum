@@ -49,6 +49,7 @@
             <div class="listing-details col-md-5 bg-light">
                 <partial name="_CreateRentListingPartial" model="@Model.RentDetails" />
                 <h2>@Model.ListingDetails.Name</h2>
+                <h1>Antall rom: @Model.ListingDetails.AntallRom</h1>
                 <p>@Model.ListingDetails.Description</p>
                 <div class="listing-footer">
                     <h3>@Model.ListingDetails.Price</h3>

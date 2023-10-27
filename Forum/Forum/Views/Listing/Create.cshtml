@@ -24,6 +24,11 @@
 
     </div>
     <div class="form-group">
+        <label asp-for="AntallRom"></label><span class="text-danger">*</span>
+        <input asp-for="AntallRom" class="form-control" />
+        <span asp-validation-for="AntallRom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="ImageUrl"></label>
         <input asp-for="ImageUrl" class="form-control" />
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
