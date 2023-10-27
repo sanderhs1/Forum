@@ -19,6 +19,10 @@ namespace Forum.Models
 
         public string? ImageUrl { get; set; }
 
+        public string? ImageUrl1 { get; set; }
+
+
+
 
         public virtual List<RentListing>? RentListings { get; set; }
     }

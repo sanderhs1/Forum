@@ -11,9 +11,7 @@
     .listing-box {
         border: 1px solid #ccc;
         margin: 1%;
-        width: 20%;
-        min-width: 200px;
-        max-width: 300px;
+        width: 300px; /* Fixed width for the listing box */
         display: flex;
         flex-direction: column;
         transition: transform 0.3s;
@@ -28,12 +26,13 @@
     .listing-image {
         flex: 1;
         overflow: hidden;
+        position: relative;
     }
 
         .listing-image img {
-            width: 100%;
+            width: 100%; /* Ensure the image takes up the full width of the container */
             object-fit: cover;
-            height: 200px;
+            height: 200px; /* Fixed height for the image */
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
@@ -43,7 +42,6 @@
         overflow: hidden;
     }
 
-    /* Add CSS for the name, description, and price */
     .listing-name {
         font-weight: bold;
     }
@@ -61,7 +59,36 @@
         bottom: 20px;
         right: 20px;
     }
+
+    .image-switch-button {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+        .image-switch-button::before {
+            content: "→";
+            font-size: 18px;
+            color: #fff;
+        }
+
+    .listing-image:hover .image-switch-button {
+        opacity: 1;
+    }
 </style>
+
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -69,11 +96,13 @@
 <div class="container">
     @foreach (var listing in Model)
     {
-        <div class="listing-box" onclick="location.href='@Url.Action("ListingView", "Listing", new { id = listing.ListingId })'">
+        <div class="listing-box">
             <div class="listing-image">
                 <img src="@listing.ImageUrl" alt="Listing Image" class="img-fluid" />
+                <img src="@listing.ImageUrl1" alt="Listing Image" class="img-fluid" style="display: none;" />
+                <div class="image-switch-button" onclick="toggleImage(event)"></div>
             </div>
-            <div class="listing-details">
+            <div class="listing-details" onclick="location.href='@Url.Action("ListingView", "Listing", new { id = listing.ListingId })'">
                 <div class="listing-name">
                     <a>@listing.Name</a>
                 </div>
@@ -81,8 +110,9 @@
                     <a>@listing.Description</a>
                 </div>
                 <div class="listing-price">
-                   <a> @listing.Price.ToString("0.00 NOK")</a>
+                    <a>@listing.Price.ToString("0.00 NOK")</a>
                 </div>
+
                 <div class="action-links">
                     <a asp-action="Update" asp-route-id="@listing.ListingId">Update</a>
                     <a asp-action="Delete" asp-route-id="@listing.ListingId">Delete</a>
@@ -94,3 +124,15 @@
         <a class="btn btn-secondary" asp-controller="Listing" asp-action="Create">Create new Listing</a>
     </p>
 </div>
+
+<script>
+    function toggleImage(event) {
+        event.stopPropagation(); // Prevent event propagation to parent element
+        const button = event.target;
+        const imageContainer = button.parentElement;
+        const images = imageContainer.querySelectorAll("img");
+        images.forEach((img) => {
+            img.style.display = img.style.display === "none" ? "block" : "none";
+        });
+    }
+</script>

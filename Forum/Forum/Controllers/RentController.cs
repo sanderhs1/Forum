@@ -109,6 +109,7 @@ namespace Forum.Controllers
             {
                 return BadRequest("RentListing creation failed.");
             }
+
         }
     }
 }

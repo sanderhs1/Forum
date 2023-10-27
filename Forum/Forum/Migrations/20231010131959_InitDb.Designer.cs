@@ -31,6 +31,8 @@ namespace Forum.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("TEXT");
 
+                 
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
