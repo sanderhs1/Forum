@@ -23,6 +23,10 @@ public class ListingRepository : InterListingRepository
         return await _db.Listings.ToListAsync();
     }
     // Warning her
+    public IQueryable<Listing> GetAllAsQueryable()
+    {
+        return _db.Listings.AsQueryable();
+    }
     public async Task<IEnumerable<Listing>> GetAll()
     {
         try

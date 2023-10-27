@@ -1,7 +1,26 @@
 ﻿@model ListingListViewModel
 
 
+<div>
+    <label for="priceFilter">Filter by Maximum Price: </label>
+    <input type="range" id="priceFilter" step="0.01" value="50" min="0" max="1000" oninput="updatePriceDisplay(this.value)" />
+    <span id="priceDisplay">50</span>
+    <button onclick="applyFilter()">Apply Filter</button>
+</div>
+<script>
+    function applyFilter() {
+        const priceValue = document.getElementById('priceFilter').value;
+        const currentUrl = window.location.href.split('?')[0];  // Get base URL without query params
+        window.location.href = `${currentUrl}?maxPrice=${priceValue}`;
+    }
 
-<partial name="_ListingTable" model="Model.Listings"/>
+    function updatePriceDisplay(value) {
+        document.getElementById('priceDisplay').textContent = value;
+    }
+
+    // Initial update to match the default value of the slider
+    updatePriceDisplay(document.getElementById('priceFilter').value);
+</script>
+<partial name="_ListingTable" model="Model.Listings" />
 
 @*<a class="btn btn-primary" asp-action ="RentConsole">Console Output</a>*@

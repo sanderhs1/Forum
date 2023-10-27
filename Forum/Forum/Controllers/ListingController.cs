@@ -28,16 +28,23 @@ public class ListingController : Controller
     //}
 
 
-    public async Task<IActionResult> Table()
+    public async Task<IActionResult> Table(decimal? maxPrice = null)
     {
+        IQueryable<Listing> query = _listingRepository.GetAllAsQueryable();
 
-        var listings = await _listingRepository.GetAll();
-        if (listings == null)
+        if (maxPrice.HasValue)
         {
-            _logger.LogError("[ListingController] Listing list not found while executing _lisitngRepository.GetAll()");
-            return NotFound("Listings list not found");
-
+            query = query.Where(l => l.Price <= maxPrice.Value);
         }
+
+        var listings = await query.ToListAsync();
+
+        if (listings == null || !listings.Any())
+        {
+            _logger.LogError("[ListingController] Listing list not found while executing _listingRepository.GetAll()");
+            return NotFound("Listings list not found");
+        }
+
         var listingListViewModel = new ListingListViewModel(listings, "Table");
         return View(listingListViewModel);
     }

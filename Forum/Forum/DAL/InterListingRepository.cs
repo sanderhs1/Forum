@@ -10,6 +10,8 @@ namespace Forum.DAL
         Task<List<Listing>> GetAllListings();
         Task<List<RentListing>> GetAllRents();
 
+        IQueryable<Listing> GetAllAsQueryable();
+
         Task <bool>Create(Listing listing);
 
         Task <bool>Update(Listing listing);
