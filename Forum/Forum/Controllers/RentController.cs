@@ -46,10 +46,9 @@ namespace Forum.Controllers
                 RentSelectList = rents.Select(rent => new SelectListItem
                 {
                     Value = rent.RentId.ToString(),
-                    Text = "Rent" + rent.RentId.ToString() + ", Date: " + rent.CheckInDate + ", Customer: " + rent.Customer?.CustomerName ?? "Customer Not Found"
+                    Text = "Rent" + rent.RentId.ToString()   + ", Customer: " + rent.Customer?.CustomerName ?? "Customer Not Found"
                 }).ToList(),
-                CheckInDate = DateTime.Now,
-                CheckOutDate = DateTime.Now.AddDays(1)
+
             };
             return View(createRentListingViewModel);
         }
@@ -58,8 +57,6 @@ namespace Forum.Controllers
         {
             try
             {
-                DateTime checkInDate = rentListing.CheckInDate;
-                DateTime checkOutDate = rentListing.CheckOutDate;
                 var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
                 var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
 
@@ -96,7 +93,7 @@ namespace Forum.Controllers
                         RentSelectList = rents.Select(rent => new SelectListItem
                         {
                             Value = rent.RentId.ToString(),
-                            Text = "Rent" + rent.RentId.ToString() + ", Date: " + rent.CheckInDate + ", Customer: " + rent.Customer?.CustomerName ?? "Cusotmer not Found"
+                            Text = "Rent" + rent.RentId.ToString() +  ", Customer: " + rent.Customer?.CustomerName ?? "Cusotmer not Found"
                         }).ToList(),
                     };
                     return View(createRentListingViewModel);

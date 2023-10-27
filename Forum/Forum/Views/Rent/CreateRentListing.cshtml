@@ -18,35 +18,16 @@
         <span asp-validation-for="RentListing.RentId" class="text-danger"></span>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m=>m.CheckInDate, new {@class = "control-label"})
-        <div class="input-group date" id="checkin-datepicker">
-            @Html.TextBoxFor(m=>m.CheckInDate, "{0:dd/MM/yyyy}", new{@class ="form-control"})
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
+        <label asp-for="RentListing.RentListingPrice"></label><span class="text-danger">*</span>
+        <input asp-for="RentListing.RentListingPrice" class="form-control" />
+        <span asp-validation-for="RentListing.RentListingPrice" class="text-danger"></span>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m=>m.CheckOutDate, new {@class = "control-label"})
-        <div class="input-group date" id="checkout-datepicker">
-            @Html.TextBoxFor(m=>m.CheckOutDate, "{0:dd/MM/yyyy}", new{@class ="form-control"})
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
+        <label asp-for="RentListing.RentListingId"></label><span class="text-danger">*</span>
+        <input asp-for="RentListing.RentListingId" class="form-control"  />
+        <span asp-validation-for="RentListing.RentListingId" class="text-danger"></span>
     </div>
-    @section Scripts{
-        <script>
-            $(function () {
-                $('#checkin-datepicker').datepicker({
-                    format: 'dd/mm/yyyy'
-                });
-                $('#checkout-datepicker').datepicker({
-                    format: 'dd/mm/yyyy'
-                });
-            })
-        </script>
-    }
+
     <button type="submit" class="btn btn-primary">Rent</button>
     <a asp-controller="Listing" asp-action="Table" class="btn btn-secondary">Back to Listing Table</a>
 </form>

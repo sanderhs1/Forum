@@ -13,10 +13,4 @@ public class RentListing
     public int RentId { get; set; }
     public virtual Rent Rent { get; set; } = default!;
     public decimal RentListingPrice { get; set; }
-
-    [Display(Name = "Check In Date")]
-    public DateTime CheckInDate { get; set; }
-
-    [Display(Name = "Check Out Date")]
-    public DateTime CheckOutDate { get; set; }
 }
