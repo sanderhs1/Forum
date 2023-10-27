@@ -23,7 +23,7 @@ public class ListingRepository : InterListingRepository
         return await _db.Listings.ToListAsync();
     }
     // Warning her
-    public async Task<IEnumerable<Listing>?> GetAll()
+    public async Task<IEnumerable<Listing>> GetAll()
     {
         try
         {
@@ -32,7 +32,7 @@ public class ListingRepository : InterListingRepository
         catch (Exception e)
         {
             _logger.LogError("[ListingRepository] listings ToListAsync() failed when GetAll(), error message: {e}", e.Message);
-            return null;
+            return Enumerable.Empty<Listing>(); // Return an empty collection in case of an error.
         }
     }
 
@@ -99,7 +99,7 @@ public class ListingRepository : InterListingRepository
 
         catch(Exception e)
         { // warning her
-            _logger.LogError("[ListingController] listing deletion failed for the ListingId {ListingId:0000, error message: {e}", id, e.Message);
+            _logger.LogError("[ListingController] listing deletion failed for the ListingId {ListingId:0000}, error message: {ErrorMessage}", id, e.Message);
             return false;
         }
     }
