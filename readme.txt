@@ -21,6 +21,7 @@ FEATURES:
 Feil:
 
 Noe feil med sammenhengen av RentListing - Rent- RentController (Mulig at det er noe feil med variabler der, kan ikke legge til ting i databasen selv direkte)
+HomeController blandet med CustomerController
 
 FERDIG:
 - Unit testing ( Ferdig, OK med testene ) 
