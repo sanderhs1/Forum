@@ -11,17 +11,14 @@ LISTE SOM MÅ GJØRES:
 
 FEATURES:
 - Sort f.eks (billigst, størst, dyrest etc.) / Filter
-- Datoer på renting?
 - Adresse på renting sted
-- Pris per natt, med totalpris over dato
 - Kontakt karen som satt ut listing?
-- Antall senger / størrelse på listing controller ( flere ting trengs )
+-  / størrelse på listing controller ( flere ting trengs )
 - Mulig rating system?
 
 Feil:
 
-Noe feil med sammenhengen av RentListing - Rent- RentController (Mulig at det er noe feil med variabler der, kan ikke legge til ting i databasen selv direkte)
-HomeController blandet med CustomerController
+
 
 FERDIG:
 - Unit testing ( Ferdig, OK med testene ) 
