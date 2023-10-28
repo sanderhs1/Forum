@@ -25,6 +25,28 @@ namespace Forum.Controllers
             List<Rent> rents = await _listingDbContext.Rents.ToListAsync();
             return View(rents);
         }
+        [HttpGet]
+        public async Task<IActionResult> RentDetails(int rentId)
+        {
+            var rent = await _listingDbContext.Rents
+                .Include(r => r.RentListings)
+                .ThenInclude(rl => rl.Listing)
+                .FirstOrDefaultAsync(r => r.RentId == rentId);
+
+            if (rent == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new RentDetailsViewModel
+            {
+                Rent = rent,
+                RentListings = rent.RentListings,
+                Listing = rent.RentListings.FirstOrDefault()?.Listing
+            };
+
+            return View(viewModel);
+        }
 
         [Authorize]
         [HttpGet]
@@ -101,7 +123,7 @@ namespace Forum.Controllers
                 }
                 _listingDbContext.RentListings.Add(newRentListing);
                 await _listingDbContext.SaveChangesAsync();
-                return RedirectToAction(nameof(Table));
+                return RedirectToAction(nameof(RentDetails), new { rentId = newRentListing.RentId });
             }
             catch
             {

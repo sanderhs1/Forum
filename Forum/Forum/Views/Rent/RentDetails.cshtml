@@ -1,0 +1,16 @@
+﻿@model RentDetailsViewModel
+
+<h2>Rent Details</h2>
+<p><strong>Customer ID:</strong> @Model.Rent.CustomerId</p>
+
+@foreach (var rentListing in Model.RentListings)
+{
+    <div>
+        <h3>Order Details:</h3>
+        <p><strong>Name:</strong> @rentListing.Listing.Name</p>
+        <p><strong>Price:</strong> @rentListing.Listing.Price</p>
+        <p><strong>Description:</strong> @rentListing.Listing.Description</p>
+        <p><strong>Days Stayed:</strong> @rentListing.DaysStayed</p>
+        <p><strong>Rent Price:</strong> @rentListing.RentListingPrice</p>
+    </div>
+}

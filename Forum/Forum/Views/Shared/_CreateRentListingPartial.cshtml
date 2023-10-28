@@ -12,9 +12,7 @@
 
     <div class="form-group">
         <label asp-for="RentListing.RentId">Select Rent ID</label><span class="text-danger">*</span>
-        <select asp-for="RentListing.RentId" asp-items="Model.RentSelectList" class="form-control">
-            <option value="">Select an order...</option>
-        </select>
+        <select asp-for="RentListing.RentId" asp-items="Model.RentSelectList" class="form-control"></select>
         <span asp-validation-for="RentListing.RentId" class="text-danger"></span>
     </div>
     <div class="form-group">

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Rent>
 
-<h1>List of Orders</h1>
+ <h1>List of Orders</h1>
 
-@foreach (var rent in Model)
-{
+ @foreach (var rent in Model)
+ {
     <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;">
         <div class="container">
             <h5>Order @rent.RentId </h5>
@@ -23,5 +23,4 @@
         </div>
         <partial name="_RentListingTable" model="rent.RentListings" />
     </div>
-}
-
+ }
