@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Migrations
 {
     [DbContext(typeof(ListingDbContext))]
-    [Migration("20231027171641_VariableUpd")]
-    partial class VariableUpd
+    [Migration("20231028193752_MakeCustomerIdNullable")]
+    partial class MakeCustomerIdNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,8 +99,8 @@ namespace Forum.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DaysStayed")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ListingId")
                         .HasColumnType("INTEGER");
@@ -109,6 +109,9 @@ namespace Forum.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("RentListingPrice")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("RentListingId");

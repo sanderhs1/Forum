@@ -6,6 +6,7 @@ using Forum.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Cryptography.Xml;
+using Microsoft.IdentityModel.Tokens;
 
 
 // Create OrderItem er vår RentView
@@ -82,18 +83,30 @@ namespace Forum.Controllers
             try
             {
                 var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
-                var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
+                
 
-                if (newListing == null || newRent == null)
+                if (newListing == null)
                 {
                     return BadRequest("Listing or Rent not found");
                 }
+
+                int latestRentId = await _listingDbContext.Rents.MaxAsync(r => (int?)r.RentId) ?? 0;
+                int newRentId = latestRentId + 1;
+
+                var newRent = new Rent
+                {
+                    RentId = newRentId,
+                };
+
+
+                _listingDbContext.Rents.Add(newRent);
+                await _listingDbContext.SaveChangesAsync();
 
                 var newRentListing = new RentListing
                 {
                     ListingId = rentListing.ListingId,
                     Listing = newListing,
-                    RentId = rentListing.RentId,
+                    RentId = newRent.RentId,
                     StartDate = rentListing.StartDate,
                     EndDate = rentListing.EndDate,
                     Rent = newRent
@@ -130,8 +143,13 @@ namespace Forum.Controllers
                 await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(RentDetails), new { rentId = newRentListing.RentId });
             }
-            catch
+            catch( Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                if(ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
                 return BadRequest("RentListing creation failed.");
             }
         }
