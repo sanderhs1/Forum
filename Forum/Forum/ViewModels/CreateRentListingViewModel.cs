@@ -12,4 +12,6 @@ public class CreateRentListingViewModel
 
 
     public List<SelectListItem> RentSelectList { get; set; } = default!;
+
 }
+

@@ -75,32 +75,37 @@ namespace Forum.Controllers
             return View(createRentListingViewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRentListing(RentListing rentListing)
-{
-    try
-    {
-        var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
-        var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
-
-        if(newListing == null || newRent == null)
         {
-            return BadRequest("Listing or Rent not found");
-        }
+            try
+            {
+                var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
+                var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
 
-        var newRentListing = new RentListing
-        {
-            ListingId = rentListing.ListingId,
-            Listing = newListing,
-            RentId = rentListing.RentId,
-            DaysStayed = rentListing.DaysStayed,
-            Rent = newRent,
-        };
+                if (newListing == null || newRent == null)
+                {
+                    return BadRequest("Listing or Rent not found");
+                }
 
+                var newRentListing = new RentListing
+                {
+                    ListingId = rentListing.ListingId,
+                    Listing = newListing,
+                    RentId = rentListing.RentId,
+                    StartDate = rentListing.StartDate,
+                    EndDate = rentListing.EndDate,
+                    Rent = newRent
+                };
 
+                // Compute DaysStayed from the difference between StartDate and EndDate:
+                int daysStayed = (newRentListing.EndDate - newRentListing.StartDate).Days;
 
-                newRentListing.RentListingPrice = rentListing.DaysStayed * newRentListing.Listing.Price;
+                // Compute RentListingPrice based on DaysStayed:
+                newRentListing.RentListingPrice = daysStayed * newRentListing.Listing.Price;
 
-                if (newRentListing.Listing == null || newRentListing.Rent == null || newRentListing.DaysStayed <= 0)
+                if (newRentListing.Listing == null || newRentListing.Rent == null || daysStayed <= 0)
                 {
                     var listings = await _listingDbContext.Listings.ToListAsync();
                     var rents = await _listingDbContext.Rents.ToListAsync();
@@ -129,7 +134,6 @@ namespace Forum.Controllers
             {
                 return BadRequest("RentListing creation failed.");
             }
-
         }
     }
 }

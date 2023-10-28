@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Forum.Models;
@@ -13,5 +14,7 @@ public class RentListing
     public int RentId { get; set; }
     public virtual Rent Rent { get; set; } = default!;
     public decimal RentListingPrice { get; set; }
-    public int DaysStayed { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
+
 }
