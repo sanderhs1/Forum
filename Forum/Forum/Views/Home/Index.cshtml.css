@@ -55,8 +55,9 @@ html {
     }
 
 h2{
-    color: white;
-    font-size: 225%;
+    color: black;
+    font-size: 250%;
+    margin-left: 5%;
 }
 
 h1{
@@ -191,3 +192,124 @@ html{
     min-height: 100%;
 }
 
+
+.featured .left-image {
+    position: relative;
+}
+
+    .featured .left-image img {
+        padding-left: 55px;
+    }
+
+    .featured .left-image a {
+        display: inline-block;
+        width: 110px;
+        height: 110px;
+        line-height: 110px;
+        background-color: #f35525;
+        border-radius: 50%;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        bottom: -55px;
+    }
+
+.featured .section-heading {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 70px;
+}
+
+.featured h6{
+    margin-left: 3%;
+}
+
+    .featured .section-heading h2 {
+        width: 90%;
+    }
+
+.featured .accordion {
+    margin-left: 10px;
+    margin-right: 10px;
+    --bs-accordion-border-radius: 10px;
+    --bs-accordion-inner-border-radius: 10px;
+    --bs-accordion-bg: #fafafa;
+    --bs-accordion-border-color: none;
+    border: none !important;
+}
+
+.featured .accordion-header {
+    border-bottom: 10px solid #eaeaea;
+}
+
+.featured .accordion-button {
+    box-shadow: none;
+    font-size: 17px;
+    font-weight: 500;
+    color: #1e1e1e;
+}
+
+    .featured .accordion-button:not(.collapsed) {
+        color: #f35525;
+        background-color: #fafafa;
+        outline: none;
+    }
+
+    .featured .accordion-button::after {
+        display: none;
+    }
+
+.featured #headingThree {
+    border-bottom: none;
+}
+
+.featured .accordion-item:last-of-type .accordion-collapse {
+    border-top: 1px solid #eaeaea;
+}
+
+.featured .info-table {
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+    padding: 35px 35px;
+}
+
+    .featured .info-table ul li {
+        display: block;
+        margin-bottom: 35px;
+        padding-bottom: 35px;
+        border-bottom: 1px solid #eee;
+    }
+
+        .featured .info-table ul li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .featured .info-table ul li img {
+            float: left;
+            margin-right: 25px;
+        }
+
+        .featured .info-table ul li h4 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+            .featured .info-table ul li h4 span {
+                font-size: 15px;
+                color: #aaa;
+                font-weight: 400;
+            }
+.featuredpic{
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 110%;
+    height: 110%;
+    margin-bottom: 10px;
+    background-position: center;
+    opacity: 1.1;
+    margin-left: -20px;
+}
