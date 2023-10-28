@@ -18,7 +18,7 @@ FEATURES:
 
 Feil:
 
-
+Det er feil med databasen vår, tror det er Rent models som fucker opp
 
 FERDIG:
 - Unit testing ( Ferdig, OK med testene ) 
