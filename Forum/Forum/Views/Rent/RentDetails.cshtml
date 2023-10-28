@@ -1,18 +1,16 @@
 ﻿@model RentDetailsViewModel
 
 <h2>Booking Details</h2>
-<p><strong>Customer ID:</strong> @Model.Rent.CustomerId</p>
+<p><strong>Customer ID:</strong> @Model.Rent?.CustomerId</p>
 
-@foreach (var rentListing in Model.RentListings)
-{
+
     <div>
         <h3>Booking Details:</h3>
-        <p><strong>Name:</strong> @rentListing.Listing.Name</p>
-        <p><strong>Price:</strong> @rentListing.Listing.Price</p>
-        <p><strong>Description:</strong> @rentListing.Listing.Description</p>
-        <p><strong>Start Date:</strong> @rentListing.StartDate</p>
-        <p><strong>End Date:</strong> @rentListing.EndDate</p>
-        <p><strong>Days Booked:</strong> @(rentListing.EndDate - rentListing.StartDate).Days</p>
-        <p><strong>Rent Price:</strong> @rentListing.RentListingPrice</p>
+        <p><strong>Name:</strong> @Model.Listing?.Name</p>
+        <p><strong>Price:</strong> @Model.Listing?.Price</p>
+        <p><strong>Description:</strong> @Model.Listing?.Description</p>
+    <p><strong>Start Date:</strong> @Model.Rent?.StartDate</p>
+    <p><strong>End Date:</strong> @Model.Rent?.EndDate</p>
+    <p><strong>Days Booked:</strong> @(Model.Rent?.EndDate - Model.Rent?.StartDate).Days</p>
+    <p><strong>Rent Price:</strong> @Model.Rent?.RentListingPrice</p>
     </div>
-}
