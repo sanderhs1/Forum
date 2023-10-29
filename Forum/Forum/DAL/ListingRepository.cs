@@ -107,4 +107,19 @@ public class ListingRepository : InterListingRepository
             return false;
         }
     }
+
+    public async Task<bool>AddUploadedImage(UploadedImage uploadedImage)
+    {
+        try
+        {
+            _db.UploadedImages.Add(uploadedImage);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("[ListingRepository] UploadedImage addition failed for uploadedImage {@uploadedImage}, error message: {e}", uploadedImage, e.Message);
+            return false;
+        }
+    }
 }

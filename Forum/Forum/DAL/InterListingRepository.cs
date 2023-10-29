@@ -17,5 +17,8 @@ namespace Forum.DAL
         Task <bool>Update(Listing listing);
 
         Task<bool> Delete(int id);
+
+        Task<bool> AddUploadedImage(UploadedImage uploadedImage);
+
     }
 }

@@ -5,6 +5,7 @@ using Forum.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Forum.DAL;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Forum.Controllers;
 
@@ -189,8 +190,42 @@ public class ListingController : Controller
         return View(viewModel);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Upload()
+    {
+        return View();
+    }
 
+    [HttpPost]
+    public async Task<IActionResult> Upload(IFormFile file)
+    {
+        if (file != null && file.Length > 0)
+        {
+            var uploadedImage = new UploadedImage
+            {
+                ContentType = file.ContentType
+            };
 
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                uploadedImage.imageData = memoryStream.ToArray();
+            }
 
+            bool isAdded = await _listingRepository.AddUploadedImage(uploadedImage);
+            if (!isAdded)
+            {
+                _logger.LogError("[ListingController] Failed to upload the image.");
+                return View(); 
+            }
+
+            return RedirectToAction(nameof(Table));
+        }
+
+        return View();
+    }
 }
+
+
+
 
