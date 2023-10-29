@@ -83,30 +83,18 @@ namespace Forum.Controllers
             try
             {
                 var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
-                
+                var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
 
-                if (newListing == null)
+                if (newListing == null || newRent == null)
                 {
                     return BadRequest("Listing or Rent not found");
                 }
-
-                int latestRentId = await _listingDbContext.Rents.MaxAsync(r => (int?)r.RentId) ?? 0;
-                int newRentId = latestRentId + 1;
-
-                var newRent = new Rent
-                {
-                    RentId = newRentId,
-                };
-
-
-                _listingDbContext.Rents.Add(newRent);
-                await _listingDbContext.SaveChangesAsync();
 
                 var newRentListing = new RentListing
                 {
                     ListingId = rentListing.ListingId,
                     Listing = newListing,
-                    RentId = newRent.RentId,
+                    RentId = rentListing.RentId,
                     StartDate = rentListing.StartDate,
                     EndDate = rentListing.EndDate,
                     Rent = newRent
@@ -143,13 +131,9 @@ namespace Forum.Controllers
                 await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(RentDetails), new { rentId = newRentListing.RentId });
             }
-            catch( Exception ex)
+            catch
             {
-                Console.WriteLine(ex.Message);
-                if(ex.InnerException != null)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                }
+                
                 return BadRequest("RentListing creation failed.");
             }
         }

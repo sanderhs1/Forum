@@ -1,7 +1,7 @@
 ﻿@model RentDetailsViewModel
 
 <h2>Booking Details</h2>
-<p><strong>Customer ID:</strong> @Model.Rent?.CustomerId</p>
+<p><strong>Customer ID:</strong> @Model.Rent.CustomerId</p>
 
 @foreach (var rentListing in Model.RentListings)
 {
@@ -14,5 +14,6 @@
         <p><strong>End Date:</strong> @rentListing.EndDate</p>
         <p><strong>Days Booked:</strong> @(rentListing.EndDate - rentListing.StartDate).Days</p>
         <p><strong>Rent Price:</strong> @rentListing.RentListingPrice</p>
-    </div>
+
+        </div>
 }

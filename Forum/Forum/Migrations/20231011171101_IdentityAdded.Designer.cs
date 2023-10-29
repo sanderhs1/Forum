@@ -3,6 +3,7 @@ using System;
 using Forum.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forum.Migrations
 {
     [DbContext(typeof(ListingDbContext))]
-    partial class ListingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231011171101_IdentityAdded")]
+    partial class IdentityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,17 +49,10 @@ namespace Forum.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AntallRom")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Description")
-                        .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImageUrl1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -80,13 +76,8 @@ namespace Forum.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("RentListingPrice")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("StartDate")
+                    b.Property<string>("RentDate")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalPrice")
@@ -105,9 +96,6 @@ namespace Forum.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("ListingId")
                         .HasColumnType("INTEGER");
 
@@ -117,16 +105,13 @@ namespace Forum.Migrations
                     b.Property<decimal>("RentListingPrice")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("RentListingId");
 
                     b.HasIndex("ListingId");
 
                     b.HasIndex("RentId");
 
-                    b.ToTable("RentListing");
+                    b.ToTable("RentListings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -268,11 +253,9 @@ namespace Forum.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
@@ -310,11 +293,9 @@ namespace Forum.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")

@@ -29,6 +29,7 @@ namespace Forum.Models
 
 
 
+
         public virtual List<RentListing>? RentListings { get; set; }
     }
 }
