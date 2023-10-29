@@ -1,4 +1,6 @@
 ﻿
+
+
 .featured .left-image {
     position: relative;
 }
@@ -76,7 +78,7 @@
 .featured .info-table {
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
-    padding: 35px 35px;
+    padding: 43px 30px;
 }
 
     .featured .info-table ul li {
@@ -111,17 +113,18 @@
 .featuredpic {
     width: 110%;
     height: 110%;
-    margin-bottom: 50px;
+    padding: 70px;
     opacity: 0.95;
     margin-left: -50px;
     box-shadow: 10px 10px 5px #ccc;
     -moz-box-shadow: 10px 10px 5px #ccc;
     -webkit-box-shadow: 10px 10px 5px #ccc;
+
 }
 
 
 .listings .item {
-    background-color: #fafafa;
+    background-color: lightslategray;
     border-radius: 10px;
     padding: 30px;
     margin-bottom: 30px;
@@ -132,7 +135,7 @@
     }
 
     .listings .item span.category {
-        background-color: #fbd9cf;
+        background-color: lightgray;
         font-weight: 500;
         border-radius: 5px;
         font-size: 14px;
@@ -154,7 +157,7 @@
     .listings .item ul li {
         display: inline-block;
         font-size: 15px;
-        color: #4a4a4a;
+        color: black;
         margin-right: 20px;
     }
 
@@ -171,7 +174,7 @@
 
     .listings .item h6 {
         font-size: 20px;
-        color: #f35525;
+        color: antiquewhite;
         margin-top: 6px;
         display: inline-block;
         float: right;
@@ -180,6 +183,7 @@
 
     .listings .item .main-button {
         text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .container img {
@@ -216,9 +220,10 @@ footer {
     background-color: lightslategray;
     text-align: center;
     padding: 25px 0px;
-    margin-left: -14%;
-    margin-right: -14%;
+    margin-left: -35%;
+    margin-right: -35%;
     margin-bottom: -20%;
+    overflow-x: auto;
 }
 
     footer p {
@@ -244,4 +249,11 @@ footer {
 
 
     }
+
+    .col-lg-5 {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+
 }
