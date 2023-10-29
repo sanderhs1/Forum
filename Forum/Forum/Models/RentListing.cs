@@ -8,6 +8,7 @@ namespace Forum.Models;
 public class RentListing
 {
     [BindNever]
+    
     public int RentListingId { get; set; }
     public int ListingId { get; set; }
     public virtual Listing Listing { get; set; } = default!;

@@ -5,7 +5,7 @@
 namespace Forum.Migrations
 {
     /// <inheritdoc />
-    public partial class ShopDbExpanded : Migration
+    public partial class MakeCustomerIdNullable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Forum.Models
 {
 
     public class Listing
     {
+       
         public int ListingId { get; set; }
 
         [Range(1, 100, ErrorMessage = "Number of rooms should be between 1 and 100.")]
