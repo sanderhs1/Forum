@@ -11,10 +11,10 @@ LISTE SOM MÅ GJØRES:
 
 FEATURES:
 - Sort f.eks (billigst, størst, dyrest etc.) / Filter
-- Adresse på renting sted
+- Adresse på renting sted, fiks med databasen, rom, bad osv
 - Kontakt karen som satt ut listing?
 -  Størrelse på listing controller ( flere ting trengs )
-- Mulig rating system?
+- Listingviewdesign
 
 Feil:
 Det er feil med databasen vår, tror det er Rent models som fucker opp
