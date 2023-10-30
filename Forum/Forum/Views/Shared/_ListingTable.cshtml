@@ -11,7 +11,7 @@
     .listing-box {
         border: 1px solid #ccc;
         margin: 1%;
-        width: 300px; /* Fixed width for the listing box */
+        width: 300px; 
         display: flex;
         flex-direction: column;
         transition: transform 0.3s;
@@ -30,9 +30,9 @@
     }
 
         .listing-image img {
-            width: 100%; /* Ensure the image takes up the full width of the container */
+            width: 100%; 
             object-fit: cover;
-            height: 200px; /* Fixed height for the image */
+            height: 200px; 
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
@@ -129,7 +129,7 @@
 
 <script>
     function toggleImage(event) {
-        event.stopPropagation(); // Prevent event propagation to parent element
+        event.stopPropagation(); 
         const button = event.target;
         const imageContainer = button.parentElement;
         const images = imageContainer.querySelectorAll("img");

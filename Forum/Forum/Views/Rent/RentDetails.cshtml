@@ -58,12 +58,12 @@
             <h3>Booking Detail:</h3>
             <br/>
             <p><strong>Name:</strong> @rentListing.Listing.Name</p>
-            <p><strong>Price:</strong> @rentListing.Listing.Price.ToString("C")</p> <!-- Assuming Price is a number, formatting as currency -->
+            <p><strong>Price:</strong> @rentListing.Listing.Price.ToString("C")</p> 
             <p><strong>Description:</strong> @rentListing.Listing.Description</p>
-            <p><strong>Start Date:</strong> @rentListing.StartDate.ToString("d")</p> <!-- Formatting as short date -->
+            <p><strong>Start Date:</strong> @rentListing.StartDate.ToString("d")</p> 
             <p><strong>End Date:</strong> @rentListing.EndDate.ToString("d")</p>
             <p><strong>Days Booked:</strong> @(rentListing.EndDate - rentListing.StartDate).Days</p>
-            <p><strong>Rent Price:</strong> @rentListing.RentListingPrice.ToString("C")</p> <!-- Formatting as currency -->
+            <p><strong>Rent Price:</strong> @rentListing.RentListingPrice.ToString("C")</p> 
         </div>
             }
         }

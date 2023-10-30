@@ -5,7 +5,7 @@
     <button onclick="openFilterModal()">Filter Options</button>
 </div>
 
-<!-- Filter Modal -->
+
 <div id="filterModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeFilterModal()">&times;</span>
@@ -15,8 +15,7 @@
         <input type="range" id="priceFilterModal" name="maxPrice" step="1" value="50" min="0" max="50000" oninput="updatePriceDisplayModal(this.value)" />
         <span id="priceDisplayModal">50</span>
 
-        <!-- Room filter -->
-        <!-- Room filter with input field instead of select -->
+
         <label for="roomFilterInputModal">Minimum Number of Rooms: </label>
         <input type="number" id="roomFilterInputModal" name="minRooms" min="1" placeholder="Any" />
         <div id="filterError" class="filter-error" style="display: none; color: red;"></div>
@@ -28,32 +27,30 @@
 
 
 <style>
-    /* Add your previous styles here */
 
-    /* The Modal (background) */
     .modal {
-        display: none; /* Hidden by default */
+        display: none; 
         position: fixed;
-        z-index: 1; /* Sit on top */
+        z-index: 1; 
         left: 0;
         top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
     }
 
-    /* Modal Content */
+
     .modal-content {
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
+        margin: 15% auto; 
         padding: 20px;
         border: 1px solid #888;
-        width: 30%; /* Could be more or less, depending on screen size */
+        width: 30%; 
     }
 
-    /* The Close Button */
+
     .close {
         color: #aaa;
         float: right;
@@ -69,12 +66,12 @@
         }
 
     .filter-error {
-        /* Styles for the error message */
+        
         margin-top: 10px;
     }
 </style>
 <script>
-    // Add your existing scripts here
+ 
 
 
 
@@ -91,37 +88,37 @@
     }
 
     function applyFiltersModal() {
-        // Get the selected values from the filter inputs
+       
         const priceValue = document.getElementById('priceFilterModal').value;
         const roomValue = document.getElementById('roomFilterInputModal').value;
         const errorDiv = document.getElementById('filterError');
 
-        // Clear previous errors
+        
         errorDiv.style.display = 'none';
         errorDiv.textContent = '';
 
-        // Validate inputs (example: check if roomValue is a number and greater than 0)
+       
         if (!roomValue || isNaN(roomValue) || parseInt(roomValue) < 1) {
             errorDiv.textContent = 'Please enter a valid number of rooms.';
             errorDiv.style.display = 'block';
-            return; // Do not close the modal or redirect
+            return; 
         }
 
-        closeFilterModal(); // Close the modal after applying the filters
+        closeFilterModal(); 
 
-        // Construct the query parameters
+        
         let queryParams = `?maxPrice=${priceValue}`;
-        if (roomValue) { // Only add the room parameter if a value has been entered
+        if (roomValue) { 
             queryParams += `&minRooms=${roomValue}`;
         }
 
-        // Redirect to the filtered URL
+     
         const currentUrl = window.location.href.split('?')[0];
         window.location.href = `${currentUrl}${queryParams}`;
     }
 
 
-    // When the user clicks anywhere outside of the modal, close it
+   
     window.onclick = function (event) {
         const modal = document.getElementById('filterModal');
         if (event.target === modal) {

@@ -11,7 +11,6 @@ namespace Forum.Controllers;
 
 public class ListingController : Controller
 {
-    //private readonly ListingDbContext _listingDbContext;
 
     private readonly InterListingRepository _listingRepository;
     private readonly ILogger<ListingController> _logger;
@@ -33,13 +32,13 @@ public class ListingController : Controller
     {
         IQueryable<Listing> query = _listingRepository.GetAllAsQueryable();
 
-        // Filter by maximum price if provided
+
         if (maxPrice.HasValue)
         {
             query = query.Where(l => l.Price <= maxPrice.Value);
         }
 
-        // Filter by minimum number of rooms (AntallRom) if provided
+
         if (minRooms.HasValue)
         {
             query = query.Where(l => l.AntallRom >= minRooms.Value);
@@ -51,13 +50,13 @@ public class ListingController : Controller
         if (listings == null || !listings.Any())
         {
             _logger.LogError("[ListingController] No listings found with the specified filters.");
-            // Set the error message if no listings are found
+
             listingListViewModel.ErrorMessage = "No listings found with the specified filters.";
         }
 
         return View(listingListViewModel);
     }
-    // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes
+
     public async Task<IActionResult> Grid()
     {
 
@@ -190,50 +189,16 @@ public class ListingController : Controller
                 RentSelectList = rents.Select(r => new SelectListItem
                 {
                     Value = r.RentId.ToString(),
-                    Text = $"Rent {r.RentId}"  // fixed here
+                    Text = $"Rent {r.RentId}"
                 }).ToList()
             }
         };
 
         return View(viewModel);
     }
-
-    [HttpGet]
-    public IActionResult Upload()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Upload(IFormFile file)
-    {
-        if (file != null && file.Length > 0)
-        {
-            var uploadedImage = new UploadedImage
-            {
-                ContentType = file.ContentType
-            };
-
-            using (var memoryStream = new MemoryStream())
-            {
-                await file.CopyToAsync(memoryStream);
-                uploadedImage.imageData = memoryStream.ToArray();
-            }
-
-            bool isAdded = await _listingRepository.AddUploadedImage(uploadedImage);
-            if (!isAdded)
-            {
-                _logger.LogError("[ListingController] Failed to upload the image.");
-                return View(); 
-            }
-
-            return RedirectToAction(nameof(Table));
-        }
-
-        return View();
-    }
 }
 
+    
 
 
 

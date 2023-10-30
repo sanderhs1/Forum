@@ -9,7 +9,6 @@ using System.Security.Cryptography.Xml;
 using Microsoft.IdentityModel.Tokens;
 
 
-// Create OrderItem er vår RentView
 
 namespace Forum.Controllers
 { 
@@ -82,14 +81,14 @@ namespace Forum.Controllers
         {
             if (rentListing.EndDate <= rentListing.StartDate)
             {
-                // Populate the ViewModel for RentDetails view, including the error message
+               
                 var rentDetailsViewModel = new RentDetailsViewModel
                 {
-                    // ...populate other necessary properties,
+                  
                     ErrorMessage = "End date must be greater than start date."
                 };
 
-                // Return the RentDetails view with the ViewModel
+             
                 return View("RentDetails", rentDetailsViewModel);
             }
             try
@@ -112,10 +111,10 @@ namespace Forum.Controllers
                     Rent = newRent
                 };
 
-                // Compute DaysStayed from the difference between StartDate and EndDate:
+                
                 int daysStayed = (newRentListing.EndDate - newRentListing.StartDate).Days;
 
-                // Compute RentListingPrice based on DaysStayed:
+              
                 newRentListing.RentListingPrice = daysStayed * newRentListing.Listing.Price;
 
                 if (newRentListing.Listing == null || newRentListing.Rent == null)

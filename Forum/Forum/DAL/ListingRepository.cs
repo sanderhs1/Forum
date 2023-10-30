@@ -16,7 +16,7 @@ public class ListingRepository : InterListingRepository
     }
     public async Task<List<RentListing>> GetAllRents()
     {
-        return await _db.RentListings.ToListAsync();  // assuming your DbSet is named RentListings
+        return await _db.RentListings.ToListAsync();  
     }
     public async Task<List<Listing>> GetAllListings()
     {
@@ -36,7 +36,7 @@ public class ListingRepository : InterListingRepository
         catch (Exception e)
         {
             _logger.LogError("[ListingRepository] listings ToListAsync() failed when GetAll(), error message: {e}", e.Message);
-            return Enumerable.Empty<Listing>(); // Return an empty collection in case of an error.
+            return Enumerable.Empty<Listing>(); 
         }
     }
 
@@ -108,18 +108,4 @@ public class ListingRepository : InterListingRepository
         }
     }
 
-    public async Task<bool>AddUploadedImage(UploadedImage uploadedImage)
-    {
-        try
-        {
-            _db.UploadedImages.Add(uploadedImage);
-            await _db.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception e)
-        {
-            _logger.LogError("[ListingRepository] UploadedImage addition failed for uploadedImage {@uploadedImage}, error message: {e}", uploadedImage, e.Message);
-            return false;
-        }
-    }
 }

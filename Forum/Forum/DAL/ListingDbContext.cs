@@ -19,7 +19,6 @@ public class ListingDbContext : IdentityDbContext
     public DbSet<RentListing> RentListings { get; set; }
     public DbSet<RentListing> StartDate { get; set; }
     public DbSet<RentListing> EndDate { get; set; }
-    public DbSet<UploadedImage> UploadedImages { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

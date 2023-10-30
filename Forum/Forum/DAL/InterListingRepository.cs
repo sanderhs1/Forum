@@ -18,7 +18,6 @@ namespace Forum.DAL
 
         Task<bool> Delete(int id);
 
-        Task<bool> AddUploadedImage(UploadedImage uploadedImage);
 
     }
 }
