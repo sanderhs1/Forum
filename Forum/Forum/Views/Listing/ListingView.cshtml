@@ -42,18 +42,18 @@
     <div class="container mt-5">
         <div class="listing-container row">
             <div class="listing-image-container col-md-7">
-                <img src="@Model.ListingDetails.ImageUrl" alt="@Model.ListingDetails.Name" class="img-thumbnail" />
-                <img src="@Model.ListingDetails.ImageUrl1" alt="@Model.ListingDetails.Name" class="img-thumbnail" />
+                <img src="@(Model.ListingDetails?.ImageUrl)" alt="@(Model.ListingDetails?.Name)" class="img-thumbnail" />
+                <img src="@(Model.ListingDetails?.ImageUrl1)" alt="@(Model.ListingDetails?.Name)" class="img-thumbnail" />
                 <!-- Add more images as needed -->
             </div>
 
             <div class="listing-details col-md-5 bg-light">
                 <partial name="_CreateRentListingPartial" model="@Model.RentDetails" />
-                <h2>@Model.ListingDetails.Name</h2>
-                <h1>Antall rom: @Model.ListingDetails.AntallRom</h1>
-                <p>@Model.ListingDetails.Description</p>
+                <h2>@Model.ListingDetails?.Name</h2>
+                <h1>Antall rom: @Model.ListingDetails?.AntallRom</h1>
+                <p>@Model.ListingDetails?.Description</p>
                 <div class="listing-footer">
-                    <h3>@Model.ListingDetails.Price</h3>
+                    <h3>@Model.ListingDetails?.Price</h3>
                 </div>
             </div>
         </div>

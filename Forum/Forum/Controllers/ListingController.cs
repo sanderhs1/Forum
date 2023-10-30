@@ -199,7 +199,7 @@ public class ListingController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Upload()
+    public IActionResult Upload()
     {
         return View();
     }

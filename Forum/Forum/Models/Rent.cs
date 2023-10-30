@@ -12,7 +12,7 @@ public class Rent
 
     public virtual Customer Customer { set; get; } = default!;
 
-    public virtual List<RentListing>? RentListings { get; set; }
+    public virtual List<RentListing> RentListings { get; set; } = new List<RentListing>();
     public decimal TotalPrice { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
