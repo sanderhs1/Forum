@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booking Details</title>
+    <title> Booking Details</title>
     <style>
         .booking-detail {
             border: 1px solid #ddd;
@@ -11,6 +11,11 @@
             margin-bottom: 20px;
             border-radius: 5px;
             background-color: #f9f9f9;
+            padding: 50px;
+            margin: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Creates 3 equal columns */
+            gap: 20px;
         }
 
             .booking-detail h3 {
@@ -21,7 +26,16 @@
 
             .booking-detail p {
                 margin: 5px 0;
+      
             }
+
+            .booking-detail:hover{
+                background-color: lightslategray;
+                opacity: 0.8;
+            }
+
+
+     
     </style>
 </head>
 <body>
@@ -42,6 +56,7 @@
             {
         <div class="booking-detail">
             <h3>Booking Detail:</h3>
+            <br/>
             <p><strong>Name:</strong> @rentListing.Listing.Name</p>
             <p><strong>Price:</strong> @rentListing.Listing.Price.ToString("C")</p> <!-- Assuming Price is a number, formatting as currency -->
             <p><strong>Description:</strong> @rentListing.Listing.Description</p>
