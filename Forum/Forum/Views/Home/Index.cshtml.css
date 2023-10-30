@@ -7,11 +7,11 @@
 }
 
 
-.header .accordion {
-    --bs-accordion-border-radius: 10px;
-    --bs-accordion-inner-border-radius: 10px;
-    --bs-accordion-bg: #fafafa;
-    --bs-accordion-border-color: none;
+.header .parallel {
+    --bs-parallel-border-radius: 10px;
+    --bs-parallel-inner-border-radius: 10px;
+    --bs-parallel-bg: #fafafa;
+    --bs-parallel-border-color: none;
     border: none !important;
     padding: 20px;
     padding-top: 50px;
@@ -19,25 +19,25 @@
     text-align: center;
 }
 
-.header .accordion-header {
+.header .parallel-header {
     border-bottom: 15px solid #eaeaea;
     margin-left: 0px;
 }
 
-.header .accordion-button {
+.header .parallel-button {
     box-shadow: none;
     font-size: 17px;
     font-weight: 500;
     color: #1e1e1e;
 }
 
-    .header .accordion-button:not(.collapsed) {
+    .header .parallel-button:not(.collapsed) {
         color: #f35525;
         background-color: #fafafa;
         outline: none;
     }
 
-    .header .accordion-button::after {
+    .header .parallel-button::after {
         display: none;
     }
 
@@ -45,7 +45,7 @@
     border-bottom: none;
 }
 
-.header .accordion-item:last-of-type .accordion-collapse {
+.header .parallel-item:last-of-type .parallel-collapse {
     border-top: 1px solid #eaeaea;
 }
 
