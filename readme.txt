@@ -4,6 +4,5 @@ LISTE SOM MÅ GJØRES:
 - Design, ListingView, BookingDetails (Kjedelig design?)
 - Kommentarer
 - Error handling 
-- Logging?
 - Input Validation
 
