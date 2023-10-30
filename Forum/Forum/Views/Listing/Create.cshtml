@@ -60,6 +60,11 @@
         <input asp-for="Spots" class="form-control" />
         <span asp-validation-for="Spots" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="Adresse"></label><span class="text-danger">*</span>
+        <input asp-for="Adresse" class="form-control" />
+        <span asp-validation-for="Adresse" class="text-danger"></span>
+    </div>
     <button type="submit" class="btn btn-primary">Create</button>
     <a asp-action="Table" class="btn btn-secondary">Back to Table View</a>
 </form>
