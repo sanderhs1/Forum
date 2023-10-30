@@ -1,2 +1,1 @@
-FRIST 31.OKT.2023 KL.12
-
+Problemer med å bytte navn på filen ledet til at vi bruker navnet "Forum", selvom det er en oppgave om en Renting Side.
