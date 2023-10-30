@@ -1,15 +1,15 @@
 ﻿
 
-.featured h6 {
+.header h6 {
     text-align: center
 }
 
-.featured h2 {
+.header h2 {
     text-align: center;
 }
 
 
-.featured .accordion {
+.header .accordion {
     --bs-accordion-border-radius: 10px;
     --bs-accordion-inner-border-radius: 10px;
     --bs-accordion-bg: #fafafa;
@@ -21,57 +21,57 @@
     text-align: center;
 }
 
-.featured .accordion-header {
+.header .accordion-header {
     border-bottom: 15px solid #eaeaea;
     margin-left: 0px;
 }
 
-.featured .accordion-button {
+.header .accordion-button {
     box-shadow: none;
     font-size: 17px;
     font-weight: 500;
     color: #1e1e1e;
 }
 
-    .featured .accordion-button:not(.collapsed) {
+    .header .accordion-button:not(.collapsed) {
         color: #f35525;
         background-color: #fafafa;
         outline: none;
     }
 
-    .featured .accordion-button::after {
+    .header .accordion-button::after {
         display: none;
     }
 
-.featured #headingThree {
+.header #headingThree {
     border-bottom: none;
 }
 
-.featured .accordion-item:last-of-type .accordion-collapse {
+.header .accordion-item:last-of-type .accordion-collapse {
     border-top: 1px solid #eaeaea;
 }
 
-.featured .info-table {
+.header .info-table {
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
     padding: 70px 40px;
     margin-top: 25px;
 }
 
-    .featured .info-table ul li {
+    .header .info-table ul li {
         display: block;
         margin-bottom: 35px;
         padding-bottom: 35px;
         border-bottom: 1px solid #eee;
     }
 
-        .featured .info-table ul li:last-child {
+        .header .info-table ul li:last-child {
             border-bottom: none;
             padding-bottom: 0;
             margin-bottom: 0;
         }
 
-        .featured .info-table ul li img {
+        .header .info-table ul li img {
             float: left;
             margin-right: 100px;
             border-bottom: solid 1px gray;
@@ -79,18 +79,18 @@
             padding-bottom: 5px;
         }
 
-        .featured .info-table ul li h4 {
+        .header .info-table ul li h4 {
             font-size: 22px;
             font-weight: 600;
         }
 
-            .featured .info-table ul li h4 span {
+            .header .info-table ul li h4 span {
                 font-size: 15px;
                 color: #aaa;
                 font-weight: 400;
             }
 
-.featuredpic {
+.headerpic {
     width: 110%;
     height: 110%;
     padding: 70px;
