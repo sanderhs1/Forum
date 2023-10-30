@@ -1,6 +1,4 @@
-﻿
-
-.header h6 {
+﻿.header h6 {
     text-align: center
 }
 
@@ -164,6 +162,17 @@
         text-align: center;
         font-family: Arial, Helvetica, sans-serif;
     }
+
+    .listings .item a {
+        color: black;
+        text-decoration: none;
+    }
+
+        .listings .item a:hover {
+            text-decoration: underline;
+
+        }
+
 
 .container img {
     max-width: 100%;
