@@ -46,14 +46,15 @@ public class ListingController : Controller
         }
 
         var listings = await query.ToListAsync();
+        var listingListViewModel = new ListingListViewModel(listings, "Table");
 
         if (listings == null || !listings.Any())
         {
             _logger.LogError("[ListingController] No listings found with the specified filters.");
-            return NotFound("No listings found with the specified filters.");
+            // Set the error message if no listings are found
+            listingListViewModel.ErrorMessage = "No listings found with the specified filters.";
         }
 
-        var listingListViewModel = new ListingListViewModel(listings, "Table");
         return View(listingListViewModel);
     }
     // Fjerne Grid/Table View, Endre til ett view, hvor vi stacker listing bokser oppå hverandre, ikke i et table, men table kan brukes

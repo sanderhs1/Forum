@@ -8,6 +8,7 @@ namespace Forum.ViewModels
     {
         public IEnumerable<Listing> Listings;
         public string? CurrentViewName;
+        public string ErrorMessage { get; set; }
 
         public ListingListViewModel(IEnumerable<Listing> listings, string? currentViewName)
         {
