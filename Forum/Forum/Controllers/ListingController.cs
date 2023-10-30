@@ -29,21 +29,28 @@ public class ListingController : Controller
     //}
 
 
-    public async Task<IActionResult> Table(decimal? maxPrice = null)
+    public async Task<IActionResult> Table(decimal? maxPrice = null, int? minRooms = null)
     {
         IQueryable<Listing> query = _listingRepository.GetAllAsQueryable();
 
+        // Filter by maximum price if provided
         if (maxPrice.HasValue)
         {
             query = query.Where(l => l.Price <= maxPrice.Value);
+        }
+
+        // Filter by minimum number of rooms (AntallRom) if provided
+        if (minRooms.HasValue)
+        {
+            query = query.Where(l => l.AntallRom >= minRooms.Value);
         }
 
         var listings = await query.ToListAsync();
 
         if (listings == null || !listings.Any())
         {
-            _logger.LogError("[ListingController] Listing list not found while executing _listingRepository.GetAll()");
-            return NotFound("Listings list not found");
+            _logger.LogError("[ListingController] No listings found with the specified filters.");
+            return NotFound("No listings found with the specified filters.");
         }
 
         var listingListViewModel = new ListingListViewModel(listings, "Table");

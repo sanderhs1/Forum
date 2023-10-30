@@ -2,24 +2,114 @@
 
 
 <div>
-    <label for="priceFilter">Filter by Maximum Price: </label>
-    <input type="range" id="priceFilter" step="0.01" value="50" min="0" max="1000" oninput="updatePriceDisplay(this.value)" />
-    <span id="priceDisplay">50</span>
-    <button onclick="applyFilter()">Apply Filter</button>
+    <button onclick="openFilterModal()">Filter Options</button>
 </div>
+
+<!-- Filter Modal -->
+<div id="filterModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeFilterModal()">&times;</span>
+        <h2>Filter Listings</h2>
+
+        <label for="priceFilter">Maximum Price: </label>
+        <input type="range" id="priceFilterModal" name="maxPrice" step="1" value="50" min="0" max="50000" oninput="updatePriceDisplayModal(this.value)" />
+        <span id="priceDisplayModal">50</span>
+
+        <!-- Room filter -->
+        <!-- Room filter with input field instead of select -->
+        <label for="roomFilterInputModal">Minimum Number of Rooms: </label>
+        <input type="number" id="roomFilterInputModal" name="minRooms" min="1" placeholder="Any" />
+
+        <button onclick="applyFiltersModal()">Apply Filters</button>
+    </div>
+</div>
+
+
+
+<style>
+    /* Add your previous styles here */
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
 <script>
-    function applyFilter() {
-        const priceValue = document.getElementById('priceFilter').value;
-        const currentUrl = window.location.href.split('?')[0];  // Get base URL without query params
-        window.location.href = `${currentUrl}?maxPrice=${priceValue}`;
+    // Add your existing scripts here
+
+
+
+    function openFilterModal() {
+        document.getElementById('filterModal').style.display = 'block';
     }
 
-    function updatePriceDisplay(value) {
-        document.getElementById('priceDisplay').textContent = value;
+    function closeFilterModal() {
+        document.getElementById('filterModal').style.display = 'none';
     }
 
-    // Initial update to match the default value of the slider
-    updatePriceDisplay(document.getElementById('priceFilter').value);
+    function updatePriceDisplayModal(value) {
+        document.getElementById('priceDisplayModal').textContent = value;
+    }
+
+    function applyFiltersModal() {
+        // Get the selected values from the filter inputs
+        const priceValue = document.getElementById('priceFilterModal').value;
+        const roomValue = document.getElementById('roomFilterInputModal').value;
+
+        closeFilterModal(); // Close the modal after applying the filters
+
+        // Construct the query parameters
+        let queryParams = `?maxPrice=${priceValue}`;
+        if (roomValue) { // Only add the room parameter if a value has been entered
+            queryParams += `&minRooms=${roomValue}`;
+        }
+
+        // Redirect to the filtered URL
+        const currentUrl = window.location.href.split('?')[0];
+        window.location.href = `${currentUrl}${queryParams}`;
+    }
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        const modal = document.getElementById('filterModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    }
 </script>
 <partial name="_ListingTable" model="Model.Listings" />
 
