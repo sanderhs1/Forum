@@ -6,4 +6,4 @@ LISTE SOM MÅ GJØRES:
 - Error handling 
 - Logging?
 - Input Validation
-- Rydde opp cshtml filene
+
