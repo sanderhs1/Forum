@@ -6,6 +6,4 @@ LISTE SOM MÅ GJØRES:
 - Error handling 
 - Logging?
 - Input Validation
-- Documentation
-- Bytte explore listings link
-- CSS  i egne filer, rydde opp cshtml filene
+- Rydde opp cshtml filene
