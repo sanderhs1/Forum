@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Cryptography.Xml;
 using Microsoft.IdentityModel.Tokens;
-
+using Microsoft.Extensions.Logging;
 
 
 namespace Forum.Controllers
@@ -15,14 +15,20 @@ namespace Forum.Controllers
     public class RentController : Controller
     {
         private readonly ListingDbContext _listingDbContext;
+        private readonly ILogger<RentController> _logger;
 
-        public RentController(ListingDbContext listingDbContext)
+        public RentController(ListingDbContext listingDbContext, ILogger<RentController> logger)
         {
             _listingDbContext = listingDbContext;
+            _logger = logger;
         }
         public async Task<IActionResult> Table()
         {
             List<Rent> rents = await _listingDbContext.Rents.ToListAsync();
+            if (rents == null || !rents.Any())
+            {
+                _logger.LogError("[RentController] No rents found.");
+            }
             return View(rents);
         }
         [HttpGet]
@@ -35,6 +41,7 @@ namespace Forum.Controllers
 
             if (rent == null)
             {
+                _logger.LogWarning("[RentController] Rent not found for RentId {RentId}", rentId);
                 return NotFound();
             }
 
@@ -81,7 +88,7 @@ namespace Forum.Controllers
         {
             if (rentListing.EndDate <= rentListing.StartDate)
             {
-               
+                _logger.LogWarning("[RentController] End date {EndDate} is not greater than start date {StartDate}", rentListing.EndDate, rentListing.StartDate);
                 var rentDetailsViewModel = new RentDetailsViewModel
                 {
                   
@@ -95,6 +102,8 @@ namespace Forum.Controllers
             {
                 var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
                 var newRent = await _listingDbContext.Rents.FindAsync(rentListing.RentId);
+                _logger.LogInformation("[RentController] RentListing created successfully for ListingId {ListingId} and RentId {RentId}", rentListing.ListingId, rentListing.RentId);
+
 
                 if (newListing == null || newRent == null)
                 {
@@ -142,9 +151,10 @@ namespace Forum.Controllers
                 await _listingDbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(RentDetails), new { rentId = newRentListing.RentId });
             }
-            catch
+            catch (Exception ex)
             {
-                
+                _logger.LogError(ex, "[RentController] RentListing creation failed due to an exception.");
+
                 return BadRequest("RentListing creation failed.");
             }
         }
