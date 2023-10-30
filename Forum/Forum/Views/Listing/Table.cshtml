@@ -25,54 +25,54 @@
 </div>
 
 <script>
+    // Opens filter
     function openFilterModal() {
         document.getElementById('filterModal').style.display = 'block';
     }
 
+    // Closes filter
     function closeFilterModal() {
         document.getElementById('filterModal').style.display = 'none';
     }
 
+    // Updates the display 
     function updatePriceDisplayModal(value) {
         document.getElementById('priceDisplayModal').textContent = value;
     }
 
+    // Logic for filters
     function applyFiltersModal() {
-       
+        // Inputs
         const priceValue = document.getElementById('priceFilterModal').value;
         const roomValue = document.getElementById('roomFilterInputModal').value;
         const errorDiv = document.getElementById('filterError');
 
-        
+        // Hides error messages
         errorDiv.style.display = 'none';
         errorDiv.textContent = '';
 
-       
+        // Error Validation
         if (!roomValue || isNaN(roomValue) || parseInt(roomValue) < 1) {
             errorDiv.textContent = 'Please enter a valid number of rooms.';
             errorDiv.style.display = 'block';
-            return; 
+            return;
         }
 
-        closeFilterModal(); 
-
-        
+        // Closes the modal sets the filters
+        closeFilterModal();
         let queryParams = `?maxPrice=${priceValue}`;
-        if (roomValue) { 
+        if (roomValue) {
             queryParams += `&minRooms=${roomValue}`;
         }
-
-     
+        // Takes you to view with filters
         const currentUrl = window.location.href.split('?')[0];
         window.location.href = `${currentUrl}${queryParams}`;
     }
 
-
-   
+    // Closes the modal if clicked outsite
     window.onclick = function (event) {
-        const modal = document.getElementById('filterModal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
+        if (event.target === document.getElementById('filterModal')) {
+            closeFilterModal();
         }
     }
 </script>
