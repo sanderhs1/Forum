@@ -5,50 +5,54 @@
 <head>
     <title>Booking Details</title>
     <style>
-        /* Add your custom CSS styles here */
-        h2 {
-            font-size: 24px;
+        .booking-detail {
+            border: 1px solid #ddd;
+            padding: 15px;
             margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
 
-        .booking-container {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .booking-title {
-            font-size: 20px;
-        }
-
-        .booking-details {
-            margin-top: 10px;
-        }
-
-            .booking-details h3 {
-                font-size: 18px;
+            .booking-detail h3 {
+                border-bottom: 1px solid #eee;
+                padding-bottom: 10px;
+                margin-bottom: 10px;
             }
 
-            .booking-details p {
-                margin: 8px 0;
+            .booking-detail p {
+                margin: 5px 0;
             }
     </style>
 </head>
+<body>
 
     <h2>Booking Details</h2>
-
     <p><strong>Customer ID:</strong> @Model.Rent?.CustomerId</p>
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger">
+            @Model.ErrorMessage
+        </div>
+    }
+    @if (Model.RentListings != null)
+    {
+    @foreach (var rentListing in Model.RentListings)
+    {
+            if (rentListing.Listing != null)
+            {
+        <div class="booking-detail">
+            <h3>Booking Detail:</h3>
+            <p><strong>Name:</strong> @rentListing.Listing.Name</p>
+            <p><strong>Price:</strong> @rentListing.Listing.Price.ToString("C")</p> <!-- Assuming Price is a number, formatting as currency -->
+            <p><strong>Description:</strong> @rentListing.Listing.Description</p>
+            <p><strong>Start Date:</strong> @rentListing.StartDate.ToString("d")</p> <!-- Formatting as short date -->
+            <p><strong>End Date:</strong> @rentListing.EndDate.ToString("d")</p>
+            <p><strong>Days Booked:</strong> @(rentListing.EndDate - rentListing.StartDate).Days</p>
+            <p><strong>Rent Price:</strong> @rentListing.RentListingPrice.ToString("C")</p> <!-- Formatting as currency -->
+        </div>
+            }
+        }
+    }
 
-@foreach (var rentListing in Model.RentListings)
-{
-    <div>
-        <h3>Booking Details:</h3>
-        <p><strong>Name:</strong> @rentListing.Listing.Name</p>
-        <p><strong>Price:</strong> @rentListing.Listing.Price</p>
-        <p><strong>Description:</strong> @rentListing.Listing.Description</p>
-        <p><strong>Start Date:</strong> @rentListing.StartDate</p>
-        <p><strong>End Date:</strong> @rentListing.EndDate</p>
-        <p><strong>Days Booked:</strong> @(rentListing.EndDate - rentListing.StartDate).Days</p>
-        <p><strong>Rent Price:</strong> @rentListing.RentListingPrice</p>
-    </div>
-}
+</body>
+</html>

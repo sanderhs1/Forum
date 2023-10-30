@@ -80,6 +80,18 @@ namespace Forum.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateRentListing(RentListing rentListing)
         {
+            if (rentListing.EndDate <= rentListing.StartDate)
+            {
+                // Populate the ViewModel for RentDetails view, including the error message
+                var rentDetailsViewModel = new RentDetailsViewModel
+                {
+                    // ...populate other necessary properties,
+                    ErrorMessage = "End date must be greater than start date."
+                };
+
+                // Return the RentDetails view with the ViewModel
+                return View("RentDetails", rentDetailsViewModel);
+            }
             try
             {
                 var newListing = await _listingDbContext.Listings.FindAsync(rentListing.ListingId);
@@ -106,7 +118,7 @@ namespace Forum.Controllers
                 // Compute RentListingPrice based on DaysStayed:
                 newRentListing.RentListingPrice = daysStayed * newRentListing.Listing.Price;
 
-                if (newRentListing.Listing == null || newRentListing.Rent == null || daysStayed <= 0)
+                if (newRentListing.Listing == null || newRentListing.Rent == null)
                 {
                     var listings = await _listingDbContext.Listings.ToListAsync();
                     var rents = await _listingDbContext.Rents.ToListAsync();
