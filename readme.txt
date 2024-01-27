@@ -1,1 +1,1 @@
-Problemer med å bytte navn på filen ledet til at vi bruker navnet "Forum", selvom det er en oppgave om en Renting Side.
+Webapplikasjoner Renting Side | Eksamen 1 MVC
